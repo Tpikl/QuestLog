@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuestLog.Models;
@@ -23,7 +19,7 @@ namespace QuestLog.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Weekly()
         {
             return View();
         }

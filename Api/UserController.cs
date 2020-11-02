@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using QuestLog.Repository;
 
 namespace QuestLog.Api
 {
@@ -8,25 +8,19 @@ namespace QuestLog.Api
     [Route("/api/[controller]")]
     public class UserController : ControllerBase
     {
-        private QuestLogDbContext _context;
+        private IUserRepository _repository;
 
-        public UserController(QuestLogDbContext context)
+        public UserController(IUserRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [HttpGet("")]
         public IActionResult Get()
-        {
-            var user = _context.Users.FirstOrDefault(x => x.Id == new Guid("DCB35393-671D-4AF5-86F0-3F88A62D7FD0"));
-            return Ok(user);
-        }
+            => Ok(_repository.GetUser(new Guid("DCB35393-671D-4AF5-86F0-3F88A62D7FD0")));
 
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
-        {
-            var user = _context.Users.FirstOrDefault(x => x.Id == id);
-            return Ok(user);
-        }
+            => Ok(_repository.GetUser(id));
     }
 }
