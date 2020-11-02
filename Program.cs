@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using QuestLog.Domain;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace QuestLog
 {
@@ -13,7 +10,24 @@ namespace QuestLog
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            // Original
+            //CreateHostBuilder(args).Build().Run();
+
+            var host = CreateHostBuilder(args).Build();
+            using(var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<QuestLogDbContext>();
+
+                context.Users.Add(new User
+                {
+                    Id = new Guid(Const.TestUserId),
+                    Username = "TestUser"
+                });
+                context.SaveChanges();
+            }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
