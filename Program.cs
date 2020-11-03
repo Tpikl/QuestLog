@@ -19,11 +19,21 @@ namespace QuestLog
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<QuestLogDbContext>();
 
+                // Create TestUser.
                 context.Users.Add(new User
                 {
                     Id = new Guid(Const.TestUserId),
                     Username = "TestUser"
                 });
+
+                // Create a sample entry.
+                context.Entries.Add(new Entry{
+                    UserId = new Guid(Const.TestUserId),
+                    Title = "Test Entry 01",
+                    Description = "Already created for quick display.",
+                    Date = DateTime.Now
+                });
+
                 context.SaveChanges();
             }
 

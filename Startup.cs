@@ -34,6 +34,7 @@ namespace QuestLog
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IEntryRepository, EntryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +52,13 @@ namespace QuestLog
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
 
             app.UseSpa(spa =>
             {

@@ -6,16 +6,9 @@ namespace QuestLog.Domain
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public int EntryType { get; set; }
         public DateTime Date { get; set; }
         public DateTime? EndDate { get; set; }
-    }
 
-    public enum EntryType
-    {
-        Day,
-        Week,
-        Month,
-        Year
+        public Guid UserId { get; set; }
     }
 }
