@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "**/bin": true,
+        "**/Client/build": true,
+        "**/Client/node_modules": true,
+        "**/obj": true
+    }
+}
