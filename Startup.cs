@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +28,9 @@ namespace QuestLog
             services.AddDbContext<QuestLogDbContext>(options => options
                 .UseLazyLoadingProxies()
                 .UseInMemoryDatabase("QuestLog"));
+
+            // React/Spa
+            services.AddSpaStaticFiles(config => { config.RootPath = "Client/build"; });
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
@@ -62,6 +61,14 @@ namespace QuestLog
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "Client";
+
+                if (env.IsDevelopment())
+                    spa.UseReactDevelopmentServer(npmScript: "start");
             });
         }
     }
