@@ -1,5 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using QuestLog.Domain;
+using QuestLog.Models;
 using QuestLog.Repository;
 
 namespace QuestLog.Api
@@ -22,5 +24,17 @@ namespace QuestLog.Api
         [HttpGet("GetByUserId/{userId}")]
         public IActionResult GetByUserId(Guid userId)
             => Ok(_repository.GetEntriesByUserId(userId));
+
+        [HttpPost("Add")]
+        public IActionResult Add([FromBody] EntryForm form)
+        {
+            _repository.AddEntry(new Entry{
+                Title = form.Title,
+                Description = form.Description,
+                Date = DateTime.Parse(form.Date),
+                UserId = new Guid(Const.TestUserId)
+            });
+            return Ok();
+        }
     }
 }

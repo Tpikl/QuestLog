@@ -2,5 +2,10 @@
     // Debug border
     border: red 1px dashed;
 
-    max-width: 250px;
+    width: 100%;
+}
+
+.dayHeader {
+    display: flex;
+    justify-content: space-between;
 }

@@ -1,11 +1,18 @@
 import React from 'react';
 
+import { Modal } from '../shared/Modal';
+
 import './Day.scss';
 
 export const Day = (props) => {
+    let modal = document.getElementById("myModal");
+
     return (
         <div className='day'>
-            <h3>{props.day}</h3>
+            <div className='dayHeader'>
+                <h3>{props.day}</h3>
+                <button onClick={() => {modal.style.display = "block";}}>Add Entry</button>
+            </div>
             <hr />
 
             <b>Entries:</b>
@@ -14,6 +21,8 @@ export const Day = (props) => {
                     {props.entries.map(x => {return (<li>{`${x.title} - ${x.description}`}</li>)})}
                 </ul>
             </div>
+
+            <Modal />
         </div>
     );
 }

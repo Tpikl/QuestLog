@@ -9,6 +9,7 @@ namespace QuestLog.Repository
     {
         Entry GetEntry(Guid Id);
         List<Entry> GetEntriesByUserId(Guid userId);
+        void AddEntry(Entry entry);
     }
 
     public class EntryRepository : IEntryRepository
@@ -25,5 +26,11 @@ namespace QuestLog.Repository
 
         public List<Entry> GetEntriesByUserId(Guid userId)
             => _context.Entries.Where(x => x.UserId == userId).ToList();
+
+        public void AddEntry(Entry entry)
+        {
+            _context.Entries.Add(entry);
+            _context.SaveChanges();
+        }
     }
 }

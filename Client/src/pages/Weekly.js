@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Day } from '../components/Day';
 
@@ -9,10 +9,12 @@ export const Weekly = () => {
     const [entries, setEntries] = useState([]);
 
     //Pull entries
-    axios.get('api/entry/getbyuserid/DCB35393-671D-4AF5-86F0-3F88A62D7FD0')
-    .then(res => {
-        setEntries(res.data);
-    })
+    useEffect(() => {
+        axios.get('api/entry/getbyuserid/DCB35393-671D-4AF5-86F0-3F88A62D7FD0')
+        .then(res => {
+            setEntries(res.data);
+        })
+    }, [])
 
     const getEntries = (day) => {
         let e = [];
