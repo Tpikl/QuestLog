@@ -5,18 +5,19 @@ import './Modal.scss'
 
 export const Modal = () => {
     let modal = document.getElementById("myModal");
-
-    let form = {
-        title: 'asd',
-        description: 'lkjsaflkialkjflkaif',
-        date: new Date().toJSON().slice(0,10).replace(/-/g,'/')
-    }
+    const [form, setForm] = useState(
+        {
+            title: '',
+            description: '',
+            date: new Date().toJSON().slice(0,10).replace(/-/g,'/')
+        }
+    )
 
     const closeModal = () => {
         modal.style.display = "none";
     }
     window.onclick = function(event) {
-        if (event.target == modal) closeModal();
+        if (event.target === modal) closeModal();
     }
 
     const submitForm = () => {
@@ -31,13 +32,10 @@ export const Modal = () => {
                 <form onSubmit={() => submitForm()}>
 
                     <label for="title">Title: </label>
-                    <input id="title" type='text' />
+                    <input id="title" type='text' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
 
                     <label for="description">Description: </label>
-                    <input id="description" type='text' />
-
-                    <label for="date">Date: </label>
-                    <input id="date" type='text' />
+                    <input id="description" type='text' value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
 
                     <input type="submit" value="Submit" />
                 </form>

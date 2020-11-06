@@ -19,7 +19,7 @@ export const Weekly = () => {
     const getEntries = (day) => {
         let e = [];
         entries.map(item => {
-            if (new Date(item.date).getDay() == day) e.push(item);
+            if (new Date(item.date).getDay() === day) return e.push(item);
         });
         return e;
     };
