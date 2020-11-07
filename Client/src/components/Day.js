@@ -1,17 +1,13 @@
 import React from 'react';
-
-import { Modal } from '../shared/Modal';
-
 import './Day.scss';
 
 export const Day = (props) => {
-    let modal = document.getElementById("myModal");
 
     return (
         <div className='day'>
             <div className='dayHeader'>
-                <h3>{props.day}</h3>
-                <button onClick={() => {modal.style.display = "block";}}>Add Entry</button>
+                <h3>{props.day.format('Do - dddd')}</h3>
+                <button onClick={props.click}>Add Entry</button>
             </div>
             <hr />
 
@@ -22,7 +18,6 @@ export const Day = (props) => {
                 </ul>
             </div>
 
-            <Modal />
         </div>
     );
 }
