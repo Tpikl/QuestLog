@@ -4,7 +4,7 @@ import './Modal.scss'
 const MODAL_ID = 'theModal';
 const GetModal = () => document.getElementById(MODAL_ID);
 
-export const Modal = (props) => {
+export const Modal = ({children}) => {
     window.onclick = function(e) {
         if (e.target === GetModal()) HideModal();
     }
@@ -16,7 +16,7 @@ export const Modal = (props) => {
                 <div className='closeWrap'>
                     <i className="far fa-window-close" onClick={() => HideModal()}></i>
                 </div>
-                {props.children}
+                {children}
 
             </div>
         </div>

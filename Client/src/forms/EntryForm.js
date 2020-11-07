@@ -6,26 +6,26 @@ import { format } from 'date-fns';
 import { AddEntry, UpdateEntry } from '../api/Entry';
 import './EntryForm.scss';
 
-export const EntryForm = (props) => {
-    const [state, dispatch] = useReducer(Reducer, props.entry ?? InitialState);
+export const EntryForm = ({entry, update}) => {
+    const [state, dispatch] = useReducer(Reducer, entry ?? InitialState);
     useEffect(() => {
-        if (props.entry !== undefined || props.entry !== null) {
-            dispatch({type: Actions.SET_ENTRY, value: props.entry})
+        if (entry !== undefined || entry !== null) {
+            dispatch({type: Actions.SET_ENTRY, value: entry})
         }
-    }, [props.entry, dispatch])
+    }, [entry, dispatch])
 
     async function submitForm(e) {
         e.preventDefault();
         if (state.id !== null)
             UpdateEntry(state)
                 .then(() => {
-                    props.update();
+                    update();
                     dispatch({type: Actions.CLEAR_INPUT});
                 });
         else
             AddEntry(state)
                 .then(() => {
-                    props.update();
+                    update();
                     dispatch({type: Actions.CLEAR_INPUT});
             });
     }

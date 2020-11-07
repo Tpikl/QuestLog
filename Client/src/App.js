@@ -8,7 +8,7 @@ import { Weekly } from './pages/Weekly';
 import './App.scss';
 
 
-export const App = (props) => {
+export const App = () => {
   return (
 
     <Router>
