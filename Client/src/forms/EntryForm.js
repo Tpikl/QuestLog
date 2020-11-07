@@ -15,7 +15,7 @@ export const EntryForm = (props) => {
     async function submitForm(e) {
         e.preventDefault();
         axios.post('api/entry/add', form);
-        window.location.reload();
+        props.update();
     }
 
     return (

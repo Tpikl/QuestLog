@@ -22,12 +22,13 @@ export const Weekly = () => {
 
     // Pull entries
     const [entries, setEntries] = useState([]);
-    useEffect(() => {
+    async function pullEntries() {
         axios.get('api/entry/getbyuserid/DCB35393-671D-4AF5-86F0-3F88A62D7FD0')
         .then(res => {
             setEntries(res.data);
         })
-    }, [])
+    }
+    useEffect(() => {pullEntries()}, [])
 
     const getEntries = (day) => {
         let e = [];
@@ -50,7 +51,7 @@ export const Weekly = () => {
         </div>
 
         <Modal>
-            <EntryForm date={formDate} />
+            <EntryForm date={formDate} update={() => {pullEntries(); modal.style.display = "none";}} />
         </Modal>
     </>);
 }
