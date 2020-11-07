@@ -6,10 +6,9 @@ import './Entry.scss';
 
 export const Entry = ({entry, update, setFormEntry}) => {
     const [state, dispatch] = useReducer(Reducer, entry)
-    // Come back to this ---
-    // useEffect(() => {
-    //     dispatch({type: Actions.SET_ENTRY, value: props.entry});
-    // }, [props.entry])
+    useEffect(() => {
+        dispatch({type: Actions.SET_ENTRY, value: entry});
+    }, [entry])
 
     useEffect(() => updateEntry(), [state.completed]);
     async function updateEntry() {
