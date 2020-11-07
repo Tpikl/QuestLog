@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { startOfWeek, addDays, format } from 'date-fns';
+import { startOfWeek, addDays } from 'date-fns';
 import { Day } from '../components/Day';
 import { Modal, ShowModal, HideModal } from '../shared/Modal';
 import { EntryForm } from '../forms/EntryForm';
@@ -26,7 +26,9 @@ export const Weekly = () => {
     function pullEntries() {
         GetEntries()
         .then(r => {
-            setEntries(r.data);
+            setEntries(r.data.map(e =>
+                ({...e, date: new Date(e.date)})
+            ));
         });
 
     }
@@ -35,19 +37,17 @@ export const Weekly = () => {
     const entriesByDay = (day) => {
         let e = [];
         entries.forEach(item => {
-            if (new Date(item.date).getDay() === day) e.push(item);
+            if (item.date.getDay() === day) e.push(item);
         });
         return e;
     };
 
-    const [formEntry, setFormEntry] = useState(null);
+    const [formEntry, setFormEntry] = useState({...InitialState});
     const addEntry = (day) => {
-        debugger;
         setFormEntry({...InitialState, date: day});
         ShowModal();
     }
     const updateFormEntry = (entry) => {
-        debugger;
         setFormEntry(entry);
         ShowModal();
     };

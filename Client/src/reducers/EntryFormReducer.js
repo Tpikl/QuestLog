@@ -38,6 +38,6 @@ export const Reducer = (state, action) => {
                 date: state.date
             };
 
-        default: return InitialState;
+        default: return state;
     }
 }

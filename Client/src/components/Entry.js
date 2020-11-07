@@ -11,7 +11,7 @@ export const Entry = (props) => {
     //     dispatch({type: Actions.SET_ENTRY, value: props.entry});
     // }, [props.entry])
 
-    useEffect(() => updateEntry(), [state])
+    useEffect(() => updateEntry(), [state, updateEntry()])
     async function updateEntry() {
         axios.put('api/entry/update', state)
         .then(() => props.update());

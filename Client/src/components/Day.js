@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { format } from 'date-fns';
 import { Entry } from './Entry';
 import './Day.scss';

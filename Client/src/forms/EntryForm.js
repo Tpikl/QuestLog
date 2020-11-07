@@ -19,8 +19,8 @@ export const EntryForm = (props) => {
         if (state.id !== null)
             axios.put('api/entry/update', state)
                 .then(() => {
-                    dispatch({type: Actions.CLEAR_INPUT});
                     props.update();
+                    dispatch({type: Actions.CLEAR_INPUT});
                 });
         else
             axios.post('api/entry/add', state)
@@ -38,10 +38,7 @@ export const EntryForm = (props) => {
             <label htmlFor="description">Description:</label>
             <input id="description" type='text' value={state.description} onChange={e => dispatch({type: Actions.SET_DESCIPTION, value: e.target.value})} />
 
-
-            {/* TODO */}
-            {/* Figure this out!!! */}
-            {/* {format(state.date, "yyyy-MM-dd")} */}
+            {format(state.date, "yyyy-MM-dd")}
 
 
             <input type="submit" value="Submit" />
