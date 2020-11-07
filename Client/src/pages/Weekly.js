@@ -4,9 +4,9 @@ import { Day } from '../components/Day';
 import { Modal, ShowModal, HideModal } from '../shared/Modal';
 import { EntryForm } from '../forms/EntryForm';
 import { GetEntries } from '../api/Entry';
-
-import './Weekly.scss';
+import PropTypes from 'prop-types';
 import { InitialState } from '../state/EntryFormState';
+import './Weekly.scss';
 
 const WeekDays = () => {
     let weekDays = []
@@ -73,4 +73,17 @@ export const Weekly = () => {
                 update={() => {pullEntries(); HideModal();}} />
         </Modal>
     </>);
+}
+
+Day.propTypes = {
+    data: PropTypes.object,
+    addEntry: PropTypes.func,
+    editEntry: PropTypes.func,
+    entries: PropTypes.array,
+    update: PropTypes.func,
+}
+
+EntryForm.propTypes = {
+    entry: PropTypes.object,
+    update: PropTypes.func
 }
