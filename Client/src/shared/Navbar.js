@@ -5,8 +5,8 @@ import './Navbar.scss';
 export const Navbar = () => {
     return (
         <nav>
-            <a href='/'>Home</a>
-            <a href='/weekly'>Weekly</a>
+            <a className={'fancyBtn'} href='/'>Home</a>
+            <a className={'fancyBtn'} href='/weekly'>Weekly</a>
         </nav>
     );
 }

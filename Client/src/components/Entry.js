@@ -27,8 +27,8 @@ export const Entry = ({entry, update, setFormEntry}) => {
                     <b style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</b>
                 </span>
                 <div>
-                    <i className="fas fa-edit" onClick={() => setFormEntry(state)}></i>
-                    <i className="far fa-window-close" onClick={() => deleteEntry()}></i>
+                    <i className="far fa-edit fa-lg" onClick={() => setFormEntry(state)}></i>
+                    <i className="far fa-window-close fa-lg" onClick={() => deleteEntry()}></i>
                 </div>
             </div>
             <small style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>

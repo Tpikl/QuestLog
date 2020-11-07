@@ -8,7 +8,7 @@ export const Day = ({day, entries, update, addEntry, editEntry}) => {
         <div className='day'>
             <div className='dayHeader'>
                 <h3>{format(day, 'do - eeee')}</h3>
-                <button onClick={addEntry}>Add</button>
+                <i className="far fa-plus-square fa-lg" onClick={addEntry}></i>
             </div>
             <hr />
 
