@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import moment from 'moment';
+import { startOfWeek, addDays, format } from 'date-fns';
 import { Day } from '../components/Day';
 import { Modal } from '../shared/Modal';
 import { EntryForm } from '../forms/EntryForm';
@@ -9,10 +9,11 @@ import './Weekly.scss';
 
 const WeekDays = () => {
     let weekDays = []
-    for (let i = 0; i < 7; i++) {
-        weekDays.push(moment().startOf('week').add(i, 'days'));
-    }
+    let startDay = startOfWeek(new Date());
 
+    for (let i = 0; i < 7; i++) {
+        weekDays.push(addDays(startDay, i));
+    }
     return weekDays;
 }
 
@@ -44,7 +45,7 @@ export const Weekly = () => {
 
         <div className='weekly'>
             {week.map((item, i) => {
-                return (<Day key={i} day={item} click={() => {setFormDate(item.format()); modal.style.display = "block";}} entries={getEntries(i)} />)
+                return (<Day key={i} day={item} click={() => {setFormDate(format(item, "yyyy-MM-dd")); modal.style.display = "block";}} entries={getEntries(i)} />)
             })}
         </div>
 

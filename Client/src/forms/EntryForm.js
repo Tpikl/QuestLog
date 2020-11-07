@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './EntryForm.scss';
 
 export const EntryForm = (props) => {
-    const [form, setForm] = useState(
-        {
-            title: '',
-            description: '',
-            date: props.date
-        }
-    )
+    const [form, setForm] = useState({
+        title: '',
+        description: '',
+        date: props.date
+    })
     useEffect(() => {
         setForm({...form, date: props.date})
     }, [props.date])
 
-    const submitForm = () => {
+    async function submitForm(e) {
+        e.preventDefault();
         axios.post('api/entry/add', form);
+        window.location.reload();
     }
 
-    return (<>
-        <form onSubmit={() => submitForm()}>
+    return (
+        <form onSubmit={(e) => submitForm(e)}>
             <label for="title">Title: </label>
             <input id="title" type='text' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
 
@@ -29,5 +30,5 @@ export const EntryForm = (props) => {
 
             <input type="submit" value="Submit" />
         </form>
-    </>)
+    )
 }

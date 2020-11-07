@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns';
 import './Day.scss';
 
 export const Day = (props) => {
@@ -6,8 +7,8 @@ export const Day = (props) => {
     return (
         <div className='day'>
             <div className='dayHeader'>
-                <h3>{props.day.format('Do - dddd')}</h3>
-                <button onClick={props.click}>Add Entry</button>
+                <h3>{format(props.day, 'do - eeee')}</h3>
+                <button onClick={props.click}>Add</button>
             </div>
             <hr />
 

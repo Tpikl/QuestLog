@@ -16,7 +16,7 @@ export const Modal = (props) => {
         <div id='myModal' className='modal'>
             <div className='modal-content'>
 
-                <span class="close" onClick={() => closeModal()}>&times;</span>
+                <div className='closeWrap'><span className="close" onClick={() => closeModal()}>&times;</span></div>
                 {props.children}
 
             </div>
