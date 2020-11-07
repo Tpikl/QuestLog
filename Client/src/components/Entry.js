@@ -22,8 +22,8 @@ export const Entry = ({entry, update, setFormEntry}) => {
 
     return (
         <div className='entry'>
-            <div className='entryTitle'>
-                <span onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
+            <div className='header'>
+                <span className={'title'} onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
                     <b style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</b>
                 </span>
                 <div>
@@ -31,7 +31,7 @@ export const Entry = ({entry, update, setFormEntry}) => {
                     <i className="far fa-window-close fa-lg" onClick={() => deleteEntry()}></i>
                 </div>
             </div>
-            <small style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
+            <small className={'description'} style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
         </div>
     )
 }

@@ -6,7 +6,21 @@
     flex-direction: column;
 }
 
-.entryTitle {
+.header {
+    padding: 5px;
     display: flex;
     justify-content: space-between;
+}
+.header:hover {
+    background-color: #eee;
+    border-bottom: 1px black solid;
+    padding-bottom: 4px;    //Cut the difference with border-bottom
+}
+
+.title {
+    cursor: pointer;
+}
+
+.description {
+    padding: 5px;
 }

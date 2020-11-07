@@ -12,13 +12,10 @@ export const Day = ({day, entries, update, addEntry, editEntry}) => {
             </div>
             <hr />
 
-            <b>Entries:</b>
             <div className='entries'>
-                <ul>
-                    {entries.map(x => {return (
-                        <Entry key={x.id} entry={x} update={update} setFormEntry={editEntry} />
-                    )})}
-                </ul>
+                {entries.map(x => {return (
+                    <Entry key={x.id} entry={x} update={update} setFormEntry={editEntry} />
+                )})}
             </div>
 
         </div>
