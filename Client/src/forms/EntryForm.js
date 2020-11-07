@@ -2,22 +2,32 @@ import React, { useEffect, useReducer } from 'react';
 import { Reducer } from '../reducers/EntryFormReducer';
 import { Actions } from '../actions/EntryFormActions';
 import { InitialState } from '../state/EntryFormState';
+import { format } from 'date-fns';
 import axios from 'axios';
 import './EntryForm.scss';
 
 export const EntryForm = (props) => {
-    const [state, dispatch] = useReducer(Reducer, InitialState);
+    const [state, dispatch] = useReducer(Reducer, props.entry ?? InitialState);
     useEffect(() => {
-        dispatch({type: Actions.SET_DATE, value: props.date})
-    }, [props.date, dispatch])
+        if (props.entry !== undefined || props.entry !== null) {
+            dispatch({type: Actions.SET_ENTRY, value: props.entry})
+        }
+    }, [props.entry, dispatch])
 
     async function submitForm(e) {
         e.preventDefault();
-        axios.post('api/entry/add', state)
-        .then(() => {
-            props.update();
-            dispatch({type: Actions.CLEAR_INPUT});
-        });
+        if (state.id !== null)
+            axios.put('api/entry/update', state)
+                .then(() => {
+                    dispatch({type: Actions.CLEAR_INPUT});
+                    props.update();
+                });
+        else
+            axios.post('api/entry/add', state)
+                .then(() => {
+                    props.update();
+                    dispatch({type: Actions.CLEAR_INPUT});
+            });
     }
 
     return (
@@ -28,7 +38,11 @@ export const EntryForm = (props) => {
             <label htmlFor="description">Description:</label>
             <input id="description" type='text' value={state.description} onChange={e => dispatch({type: Actions.SET_DESCIPTION, value: e.target.value})} />
 
-            {state.date}
+
+            {/* TODO */}
+            {/* Figure this out!!! */}
+            {/* {format(state.date, "yyyy-MM-dd")} */}
+
 
             <input type="submit" value="Submit" />
         </form>

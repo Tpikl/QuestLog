@@ -31,6 +31,7 @@ namespace QuestLog.Repository
 
         public void Add(Entry entry)
         {
+            if (entry.Id == Guid.Empty) entry.Id = Guid.NewGuid();
             _context.Entries.Add(entry);
             _context.SaveChanges();
         }

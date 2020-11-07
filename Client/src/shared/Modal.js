@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './Modal.scss'
 
 const MODAL_ID = 'theModal';
-const GetModal = () => document.getElementById(MODAL_ID)
+const GetModal = () => document.getElementById(MODAL_ID);
 
 export const Modal = (props) => {
     window.onclick = function(e) {

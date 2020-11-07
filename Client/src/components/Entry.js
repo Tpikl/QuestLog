@@ -6,9 +6,12 @@ import './Entry.scss';
 
 export const Entry = (props) => {
     const [state, dispatch] = useReducer(Reducer, props.entry)
-    useEffect(() => {
-        updateEntry();
-    }, [state])
+    // Come back to this ---
+    // useEffect(() => {
+    //     dispatch({type: Actions.SET_ENTRY, value: props.entry});
+    // }, [props.entry])
+
+    useEffect(() => updateEntry(), [state])
     async function updateEntry() {
         axios.put('api/entry/update', state)
         .then(() => props.update());
@@ -25,7 +28,7 @@ export const Entry = (props) => {
                     <b style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</b>
                 </span>
                 <div>
-                    <i className="fas fa-edit"></i>
+                    <i className="fas fa-edit" onClick={() => props.setFormEntry(state)}></i>
                     <i className="far fa-window-close" onClick={() => deleteEntry()}></i>
                 </div>
             </div>

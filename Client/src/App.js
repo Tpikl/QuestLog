@@ -5,7 +5,7 @@ import { Navbar } from './shared/Navbar';
 import { Home } from './pages/Home';
 import { Weekly } from './pages/Weekly';
 
-import './app.scss';
+import './App.scss';
 
 
 export const App = (props) => {
