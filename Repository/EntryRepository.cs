@@ -7,10 +7,11 @@ namespace QuestLog.Repository
 {
     public interface IEntryRepository
     {
-        Entry GetEntry(Guid Id);
-        List<Entry> GetEntriesByUserId(Guid userId);
-        void AddEntry(Entry entry);
-        void UpdateEntry(Entry entry);
+        Entry Get(Guid Id);
+        List<Entry> GetByUserId(Guid userId);
+        void Add(Entry entry);
+        void Update(Entry entry);
+        void Delete(Guid entryId);
     }
 
     public class EntryRepository : IEntryRepository
@@ -22,21 +23,27 @@ namespace QuestLog.Repository
             _context = context;
         }
 
-        public Entry GetEntry(Guid Id)
+        public Entry Get(Guid Id)
             => _context.Entries.FirstOrDefault(x => x.Id == Id);
 
-        public List<Entry> GetEntriesByUserId(Guid userId)
+        public List<Entry> GetByUserId(Guid userId)
             => _context.Entries.Where(x => x.UserId == userId).ToList();
 
-        public void AddEntry(Entry entry)
+        public void Add(Entry entry)
         {
             _context.Entries.Add(entry);
             _context.SaveChanges();
         }
 
-        public void UpdateEntry(Entry entry)
+        public void Update(Entry entry)
         {
             _context.Entries.Update(entry);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Guid entryId)
+        {
+            _context.Entries.Remove(Get(entryId));
             _context.SaveChanges();
         }
     }

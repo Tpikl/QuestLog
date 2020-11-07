@@ -1,14 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { format } from 'date-fns';
+import { Entry } from './Entry';
 import './Day.scss';
 
 export const Day = (props) => {
-    async function completeEntry(entry) {
-        axios.put('api/entry/update', {...entry, completed: !entry.completed})
-        .then(() => props.update());
-    }
-
     return (
         <div className='day'>
             <div className='dayHeader'>
@@ -18,16 +13,10 @@ export const Day = (props) => {
             <hr />
 
             <b>Entries:</b>
-
             <div className='entries'>
                 <ul>
                     {props.entries.map(x => {return (
-                        <span key={x.id} style={x.completed ? {textDecoration: 'line-through'}:{}} onClick={() => completeEntry(x)}>
-                            <li>
-                                <b>{x.title}</b><br />
-                                <small>{x.description}</small>
-                            </li>
-                        </span>
+                        <Entry key={x.id} entry={x} update={props.update} />
                     )})}
                 </ul>
             </div>

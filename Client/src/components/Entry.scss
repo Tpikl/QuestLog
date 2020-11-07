@@ -1,0 +1,12 @@
+.entry {
+    // Debug
+    border: 1px green inset;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.entryTitle {
+    display: flex;
+    justify-content: space-between;
+}
