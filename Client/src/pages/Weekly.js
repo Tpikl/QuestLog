@@ -36,18 +36,20 @@ export const Weekly = () => {
         return e;
     };
 
+    const [formDate, setFormDate] = useState(null);
 
     let modal = document.getElementById("myModal");
-
     return (<>
         <center><h1>-Weekly-</h1></center>
 
         <div className='weekly'>
-            {week.map((item, i) => {return (<Day key={i} day={item} click={() => {modal.style.display = "block";}} entries={getEntries(i)} />)})}
+            {week.map((item, i) => {
+                return (<Day key={i} day={item} click={() => {setFormDate(item.format()); modal.style.display = "block";}} entries={getEntries(i)} />)
+            })}
         </div>
 
         <Modal>
-            <EntryForm />
+            <EntryForm date={formDate} />
         </Modal>
     </>);
 }

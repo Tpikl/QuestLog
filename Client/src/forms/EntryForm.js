@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const EntryForm = () => {
+export const EntryForm = (props) => {
     const [form, setForm] = useState(
         {
             title: '',
             description: '',
-            date: '2020-11-06'
+            date: props.date
         }
     )
+    useEffect(() => {
+        setForm({...form, date: props.date})
+    }, [props.date])
 
     const submitForm = () => {
         axios.post('api/entry/add', form);
@@ -21,6 +24,8 @@ export const EntryForm = () => {
 
             <label for="description">Description: </label>
             <input id="description" type='text' value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
+
+            {form.date}
 
             <input type="submit" value="Submit" />
         </form>
