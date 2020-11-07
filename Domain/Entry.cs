@@ -8,6 +8,7 @@ namespace QuestLog.Domain
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public DateTime? EndDate { get; set; }
+        public bool Completed { get; set; }
 
         public Guid UserId { get; set; }
     }

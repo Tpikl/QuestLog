@@ -36,5 +36,12 @@ namespace QuestLog.Api
             });
             return Ok();
         }
+
+        [HttpPut("Update")]
+        public IActionResult Update([FromBody] Entry entry)
+        {
+            _repository.UpdateEntry(entry);
+            return Ok();
+        }
     }
 }

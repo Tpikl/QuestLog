@@ -46,7 +46,7 @@ export const Weekly = () => {
 
         <div className='weekly'>
             {week.map((item, i) => {
-                return (<Day key={i} day={item} click={() => {setFormDate(format(item, "yyyy-MM-dd")); modal.style.display = "block";}} entries={getEntries(i)} />)
+                return (<Day key={i} day={item} click={() => {setFormDate(format(item, "yyyy-MM-dd")); modal.style.display = "block";}} entries={getEntries(i)} update={() => pullEntries()} />)
             })}
         </div>
 
