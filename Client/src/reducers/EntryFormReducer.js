@@ -18,6 +18,12 @@ export const Reducer = (state, action) => {
                 ...state,
                 date: action.value
             };
+        case Actions.FLIP_COMPLETED:
+            debugger;
+            return {
+                ...state,
+                completed: !state.completed
+            }
         case Actions.CLEAR_INPUT:
             return {
                 ...InitialState,

@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
+import { Reducer } from '../reducers/EntryFormReducer';
+import { Actions } from '../actions/EntryFormActions';
 import './Entry.scss';
 
 export const Entry = (props) => {
-    async function completeEntry() {
-        axios.put('api/entry/update', {...props.entry, completed: !props.entry.completed})
+    const [state, dispatch] = useReducer(Reducer, props.entry)
+    useEffect(() => {
+        updateEntry();
+    }, [state])
+    async function updateEntry() {
+        axios.put('api/entry/update', state)
         .then(() => props.update());
     }
-
     async function deleteEntry() {
-        axios.delete(`api/entry/${props.entry.id}`)
+        axios.delete(`api/entry/${state.id}`)
         .then(() => props.update());
     }
 
     return (
         <div className='entry'>
             <div className='entryTitle'>
-                <span onClick={() => completeEntry()}>
-                    <b style={props.entry.completed ? {textDecoration: 'line-through'}:{}}>{props.entry.title}</b>
+                <span onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
+                    <b style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</b>
                 </span>
                 <div onClick={() => deleteEntry()}>X</div>
             </div>
-            <small style={props.entry.completed ? {textDecoration: 'line-through'}:{}}>{props.entry.description}</small>
+            <small style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
         </div>
     )
 }
