@@ -1,25 +1,28 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
 import './Modal.scss'
 
-export const Modal = (props) => {
-    let modal = document.getElementById("myModal");
+const MODAL_ID = 'theModal';
+const GetModal = () => document.getElementById(MODAL_ID)
 
-    const closeModal = () => {
-        modal.style.display = "none";
-    }
-    window.onclick = function(event) {
-        if (event.target === modal) closeModal();
+export const Modal = (props) => {
+    window.onclick = function(e) {
+        if (e.target === GetModal()) HideModal();
     }
 
     return (
-        <div id='myModal' className='modal'>
+        <div id={MODAL_ID} className='modal'>
             <div className='modal-content'>
 
-                <div className='closeWrap'><span className="close" onClick={() => closeModal()}>&times;</span></div>
+                <div className='closeWrap'><span className="close" onClick={() => HideModal()}>&times;</span></div>
                 {props.children}
 
             </div>
         </div>
     );
+}
+export function ShowModal() {
+    GetModal().style.display = "block";
+}
+export function HideModal() {
+    GetModal().style.display = "none";
 }
