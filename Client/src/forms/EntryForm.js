@@ -20,10 +20,10 @@ export const EntryForm = (props) => {
 
     return (
         <form onSubmit={(e) => submitForm(e)}>
-            <label for="title">Title: </label>
+            <label htmlFor="title">Title:</label>
             <input id="title" type='text' value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
 
-            <label for="description">Description: </label>
+            <label htmlFor="description">Description:</label>
             <input id="description" type='text' value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
 
             {form.date}

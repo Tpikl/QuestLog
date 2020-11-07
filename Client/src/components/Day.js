@@ -15,7 +15,9 @@ export const Day = (props) => {
             <b>Entries:</b>
             <div className='entries'>
                 <ul>
-                    {props.entries.map(x => {return (<li>{`${x.title} - ${x.description}`}</li>)})}
+                    {props.entries.map(x => {return (
+                        <li key={x.id}>{`${x.title} - ${x.description}`}</li>)
+                    })}
                 </ul>
             </div>
 
