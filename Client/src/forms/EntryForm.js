@@ -3,7 +3,7 @@ import { Reducer } from '../reducers/EntryFormReducer';
 import { Actions } from '../actions/EntryFormActions';
 import { InitialState } from '../state/EntryFormState';
 import { format } from 'date-fns';
-import axios from 'axios';
+import { AddEntry, UpdateEntry } from '../api/Entry';
 import './EntryForm.scss';
 
 export const EntryForm = (props) => {
@@ -17,13 +17,13 @@ export const EntryForm = (props) => {
     async function submitForm(e) {
         e.preventDefault();
         if (state.id !== null)
-            axios.put('api/entry/update', state)
+            UpdateEntry(state)
                 .then(() => {
                     props.update();
                     dispatch({type: Actions.CLEAR_INPUT});
                 });
         else
-            axios.post('api/entry/add', state)
+            AddEntry(state)
                 .then(() => {
                     props.update();
                     dispatch({type: Actions.CLEAR_INPUT});

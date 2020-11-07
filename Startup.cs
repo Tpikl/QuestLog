@@ -30,7 +30,16 @@ namespace QuestLog
                 .UseInMemoryDatabase("QuestLog"));
 
             // React/Spa
-            services.AddSpaStaticFiles(config => { config.RootPath = "Client/build"; });
+            // services.AddSpaStaticFiles(config => { config.RootPath = "Client/build"; });
+
+            // CORS
+            services.AddCors(options => options
+                .AddPolicy("QuestLog",
+                    builder => {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    }
+                )
+            );
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
@@ -53,6 +62,7 @@ namespace QuestLog
             app.UseRouting();
             app.UseAuthorization();
 
+            app.UseCors("QuestLog");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -60,13 +70,14 @@ namespace QuestLog
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "Client";
+            // React/Spa
+            // app.UseSpa(spa =>
+            // {
+            //     spa.Options.SourcePath = "Client";
 
-                if (env.IsDevelopment())
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-            });
+            //     if (env.IsDevelopment())
+            //         spa.UseReactDevelopmentServer(npmScript: "start");
+            // });
         }
     }
 }

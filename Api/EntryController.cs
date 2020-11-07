@@ -25,7 +25,7 @@ namespace QuestLog.Api
         public IActionResult GetByUserId(Guid userId)
             => Ok(_entryRepository.GetByUserId(userId));
 
-        [HttpPost("Add")]
+        [HttpPost]
         public IActionResult Add([FromBody] EntryForm form)
         {
             _entryRepository.Add(new Entry{
@@ -37,7 +37,7 @@ namespace QuestLog.Api
             return Ok();
         }
 
-        [HttpPut("Update")]
+        [HttpPut]
         public IActionResult Update([FromBody] Entry entry)
         {
             _entryRepository.Update(entry);
