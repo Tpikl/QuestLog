@@ -24,7 +24,10 @@ export const Entry = (props) => {
                 <span onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
                     <b style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</b>
                 </span>
-                <div onClick={() => deleteEntry()}>X</div>
+                <div>
+                    <i className="fas fa-edit"></i>
+                    <i className="far fa-window-close" onClick={() => deleteEntry()}></i>
+                </div>
             </div>
             <small style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
         </div>

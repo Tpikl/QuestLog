@@ -19,21 +19,9 @@
     padding: 20px;
     border: 1px solid #888;
   }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    margin-left: auto;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
   .closeWrap {
       display: flex;
+  }
+  .fa-window-close {
+      margin-left: auto;
   }

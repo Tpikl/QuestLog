@@ -13,7 +13,9 @@ export const Modal = (props) => {
         <div id={MODAL_ID} className='modal'>
             <div className='modal-content'>
 
-                <div className='closeWrap'><span className="close" onClick={() => HideModal()}>&times;</span></div>
+                <div className='closeWrap'>
+                    <i className="far fa-window-close" onClick={() => HideModal()}></i>
+                </div>
                 {props.children}
 
             </div>

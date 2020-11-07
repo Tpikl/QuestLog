@@ -29,8 +29,8 @@ namespace QuestLog
                 // Create a sample entry.
                 context.Entries.Add(new Entry{
                     UserId = new Guid(Const.TestUserId),
-                    Title = "Test Entry 01",
-                    Description = "Already created for quick display.",
+                    Title = "Today's Task!",
+                    Description = "Do stuff with this.",
                     Date = DateTime.Now
                 });
 
