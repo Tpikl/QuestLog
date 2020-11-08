@@ -1,10 +1,7 @@
 .weekly {
-    // Debug border
-    border: black 1px solid;
-
-    margin: auto;
-    padding: 5px;
     width: 90%;
+    padding: 5px;
+    margin: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }

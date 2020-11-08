@@ -1,24 +1,33 @@
+.entryBlock { display: inline-block;}
 .entry {
-    // Debug
-    border: 1px green inset;
-
     display: flex;
     flex-direction: column;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
 }
-
-.header {
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-}
-.header:hover {
+.entry:hover .header{
     background-color: #eee;
     border-bottom: 1px black solid;
     padding-bottom: 4px;    //Cut the difference with border-bottom
 }
+.entry:hover .controls {   // Select all .controls in .entry
+    display: block;
+}
+
+.header {
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.controls {
+    display: none;
+}
 
 .title {
     cursor: pointer;
+    margin-right: 35px;
 }
 
 .description {
