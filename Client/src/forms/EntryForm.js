@@ -50,6 +50,5 @@ export const EntryForm = ({entry, onUpdate}) => {
 
 EntryForm.propTypes = {
     entry: PropTypes.object,
-    setFormEntry: PropTypes.func,
     onUpdate: PropTypes.func
 };

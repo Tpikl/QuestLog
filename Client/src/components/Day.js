@@ -29,6 +29,6 @@ export const Day = ({day, entries, onSelect, onUpdate}) => {
 Day.propTypes = {
     day: PropTypes.object,
     entries: PropTypes.array,
-    selectEntry: PropTypes.func,
-    update: PropTypes.func,
+    onSelect: PropTypes.func,
+    onUpdate: PropTypes.func,
 };
