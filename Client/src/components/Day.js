@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import { Entry } from './Entry';
-import { InitialState } from '../state/EntryFormState';
+import { InitialState } from '../state/entry';
 import './Day.scss';
 
 export const Day = ({day, entries, onSelect, onUpdate}) => {
@@ -12,7 +12,7 @@ export const Day = ({day, entries, onSelect, onUpdate}) => {
             <div className='dayHeader pointer'>
                 <h3>[{format(day, 'do')}] - {format(day, 'eeee')}</h3>&nbsp;&nbsp;
                 <div className='flexCenter'>
-                    <i className='addBtn pointer far fa-plus-square' onClick={() => {onselect({...InitialState, date: day})}}></i>
+                    <i className='addBtn pointer far fa-plus-square' onClick={() => {onSelect({...InitialState, date: day})}}></i>
                 </div>
             </div>
 

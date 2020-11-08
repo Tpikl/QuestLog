@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { Reducer } from '../reducers/EntryFormReducer';
-import { Actions } from '../actions/EntryFormActions';
-import { InitialState } from '../state/EntryFormState';
+import { Reducer } from '../reducers/entry';
+import { Actions } from '../actions/entry';
+import { InitialState } from '../state/entry';
 import { format } from 'date-fns';
-import { AddEntry, UpdateEntry } from '../api/Entry';
+import { AddEntry, UpdateEntry } from '../api/entry';
 import './EntryForm.scss';
 
 export const EntryForm = ({entry, onUpdate}) => {

@@ -1,15 +1,15 @@
 import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { UpdateEntry, DeleteEntry } from '../api/Entry';
-import { Reducer } from '../reducers/EntryFormReducer';
-import { Actions } from '../actions/EntryFormActions';
+import { UpdateEntry, DeleteEntry } from '../api/entry';
+import { Reducer } from '../reducers/entry';
+import { Actions } from '../actions/entry';
 import './Entry.scss';
 
 export const Entry = ({entry, onSelect, onUpdate}) => {
-    const [state, dispatch] = useReducer(Reducer, entry)
+    const [state, dispatch] = useReducer(Reducer, entry);
     useEffect(() => {
         dispatch({type: Actions.SET_ENTRY, value: entry});
-    }, [entry])
+    }, [entry]);
 
     // TODO:
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,13 +25,13 @@ export const Entry = ({entry, onSelect, onUpdate}) => {
 
     const completed = () => {
         return state.completed ? 'completed' : ''
-    }
+    };
 
     return (
         <div className='entry'>
             <div className='entryBlock'>
                 <div className='header'>
-                    <span className='pointer' onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
+                    <span className='pointer' onClick={() => dispatch({type: Actions.TOGGLE_COMPLETED})}>
                         <div className={completed()}>{state.title}</div>
                     </span>
                     <div className='controls hidden'>
@@ -42,11 +42,11 @@ export const Entry = ({entry, onSelect, onUpdate}) => {
                 <small className={`description hidden ${completed()}`}>{state.description}</small>
             </div>
         </div>
-    )
-}
+    );
+};
 
 Entry.propType = {
     entry: PropTypes.object,
     onSelect: PropTypes.func,
     onDelete: PropTypes.func
-}
+};

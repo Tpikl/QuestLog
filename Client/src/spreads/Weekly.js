@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../shared/Modal';
-import { InitialState } from '../state/EntryFormState';
-import { ByDateRange } from '../api/Entry';
+import { InitialState } from '../state/entry';
+import { ByDateRange } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
-import { EndOfThisWeek, StartOfThisWeek, WeekDays } from '../util/WeekDays';
+import { endOfThisWeek, startOfThisWeek, weekDays } from '../util/weekDays';
 import { Day } from '../components/Day';
 
 import './Weekly.scss';
@@ -16,7 +16,7 @@ export const Weekly = () => {
     // Initialize Weekly data.
     const [weekEntries, setWeekEntries] = useState([]);
     function weeklyInit() {
-        ByDateRange(StartOfThisWeek(), EndOfThisWeek())
+        ByDateRange(startOfThisWeek(), endOfThisWeek())
         .then(r => {
             setWeekEntries(r.data.map(e =>
                 ({...e, date: new Date(e.date)})
@@ -44,7 +44,7 @@ export const Weekly = () => {
         <center><h1>-Weekly-</h1></center>
 
         <div className='weekly'>
-            {WeekDays(new Date()).map((item, i) => {
+            {weekDays(new Date()).map((item, i) => {
                 return (<Day 
                     key={i}
                     day={item}
@@ -60,4 +60,4 @@ export const Weekly = () => {
                 onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
         </Modal>
     </>);
-}
+};

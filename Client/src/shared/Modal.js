@@ -8,10 +8,10 @@ export const Modal = ({children, open, onClose}) => {
     window.onclick = function(e) {
         if (e.target === getModal()) onClose();
         if (e.target.parentElement === getModal()) onClose();  // Because of .flexCenter
-    }
+    };
     useEffect(() => {
         open ? showModal() : hideModal();
-    }, [open])
+    }, [open]);
 
     return (
         <div id={MODAL_ID} className='modalWrap'>

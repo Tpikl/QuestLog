@@ -8,4 +8,4 @@ export const Navbar = () => {
             <a className='fancyBtn' href='/'>Home</a>
         </nav>
     );
-}
+};

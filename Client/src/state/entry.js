@@ -1,5 +1,3 @@
-// import { format } from 'date-fns';
-
 export const InitialState =  {
     id: null,
     title: '',
@@ -8,4 +6,4 @@ export const InitialState =  {
     endDate: null,
     completed: false,
     userId: ''
-}
+};

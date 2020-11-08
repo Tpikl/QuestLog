@@ -7,4 +7,4 @@ export const Home = () => {
     return (
         <Weekly />
     );
-}
+};

@@ -1,5 +1,5 @@
-import { Actions } from '../actions/EntryFormActions';
-import { InitialState } from '../state/EntryFormState';
+import { Actions } from '../actions/entry';
+import { InitialState } from '../state/entry';
 
 export const Reducer = (state, action) => {
     switch(action.type){
@@ -27,7 +27,7 @@ export const Reducer = (state, action) => {
                 ...state,
                 endDate: action.value
             }
-        case Actions.FLIP_COMPLETED:
+        case Actions.TOGGLE_COMPLETED:
             return {
                 ...state,
                 completed: !state.completed
@@ -39,5 +39,5 @@ export const Reducer = (state, action) => {
             };
 
         default: return state;
-    }
-}
+    };
+};
