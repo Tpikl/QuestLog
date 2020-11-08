@@ -22,19 +22,23 @@ export const Entry = ({entry, update, setFormEntry}) => {
             .then(() => update());
     }
 
+    const completed = () => {
+        return state.completed ? 'completed' : ''
+    }
+
     return (
         <div className='entry'>
             <div className='entryBlock'>
                 <div className='header'>
                     <span className='pointer' onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
-                        <div style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</div>
+                        <div className={completed()}>{state.title}</div>
                     </span>
                     <div className='controls hidden'>
-                        <i className="pointer far fa-edit" onClick={() => setFormEntry(state)}></i>&nbsp;&nbsp;
-                        <i className="deleteBtn pointer far fa-window-close" onClick={() => deleteEntry()}></i>
+                        <i className='pointer far fa-edit' onClick={() => setFormEntry(state)}></i>&nbsp;&nbsp;
+                        <i className='deleteBtn pointer far fa-window-close' onClick={() => deleteEntry()}></i>
                     </div>
                 </div>
-                <small className='description hidden' style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
+                <small className={`description hidden ${completed()}`}>{state.description}</small>
             </div>
         </div>
     )
