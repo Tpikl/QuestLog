@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-
-import { Modal, ShowModal, HideModal } from '../shared/Modal';
+import { Modal } from '../shared/Modal';
 import { InitialState } from '../state/EntryFormState';
 import { ByDateRange } from '../api/Entry';
 import { EntryForm } from '../forms/EntryForm';
@@ -12,6 +10,9 @@ import './Weekly.scss';
 
 
 export const Weekly = () => {
+    // Run init on first draw.
+    useEffect(() => weeklyInit(), []);
+
     // Initialize Weekly data.
     const [weekEntries, setWeekEntries] = useState([]);
     function weeklyInit() {
@@ -21,10 +22,7 @@ export const Weekly = () => {
                 ({...e, date: new Date(e.date)})
             ));
         });
-
     }
-    // Run init on first draw.
-    useEffect(() => weeklyInit(), [])
 
     const entriesByDay = (day) => {
         let e = [];
@@ -34,14 +32,12 @@ export const Weekly = () => {
         return e;
     };
 
-    const [formEntry, setFormEntry] = useState({...InitialState});
-    const addEntry = (day) => {
-        setFormEntry({...InitialState, date: day});
-        ShowModal();
-    }
-    const updateFormEntry = (entry) => {
-        setFormEntry(entry);
-        ShowModal();
+    // Modal control
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedEntry, setSelectedEntry] = useState({...InitialState});
+    const selectModal = (entry) => {
+        setSelectedEntry(entry);
+        setModalOpen(true);
     };
 
     return (<>
@@ -53,29 +49,15 @@ export const Weekly = () => {
                     key={i}
                     day={item}
                     entries={entriesByDay(i)}
-                    addEntry={() => addEntry(item)}
-                    editEntry={updateFormEntry}
-                    updateSpread={() => weeklyInit()} />)
+                    onSelect={selectModal}
+                    onUpdate={() => weeklyInit()} />)
             })}
         </div>
 
-        <Modal>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
             <EntryForm
-                entry={formEntry}
-                updateSpread={() => {weeklyInit(); HideModal();}} />
+                entry={selectedEntry}
+                onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
         </Modal>
     </>);
-}
-
-Day.propTypes = {
-    day: PropTypes.object,
-    entries: PropTypes.array,
-    addEntry: PropTypes.func,
-    editEntry: PropTypes.func,
-    update: PropTypes.func,
-}
-
-EntryForm.propTypes = {
-    entry: PropTypes.object,
-    update: PropTypes.func
 }

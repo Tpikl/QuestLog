@@ -1,10 +1,11 @@
 import React, { useEffect, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import { UpdateEntry, DeleteEntry } from '../api/Entry';
 import { Reducer } from '../reducers/EntryFormReducer';
 import { Actions } from '../actions/EntryFormActions';
 import './Entry.scss';
 
-export const Entry = ({entry, setFormEntry, updateSpread}) => {
+export const Entry = ({entry, onSelect, onUpdate}) => {
     const [state, dispatch] = useReducer(Reducer, entry)
     useEffect(() => {
         dispatch({type: Actions.SET_ENTRY, value: entry});
@@ -15,11 +16,11 @@ export const Entry = ({entry, setFormEntry, updateSpread}) => {
     useEffect(() => updateEntry(), [state.completed]);
     async function updateEntry() {
         UpdateEntry(state)
-            .then(() => updateSpread());
+            .then(() => onUpdate());
     }
     async function deleteEntry() {
         DeleteEntry(state.id)
-            .then(() => updateSpread());
+            .then(() => onUpdate());
     }
 
     const completed = () => {
@@ -34,7 +35,7 @@ export const Entry = ({entry, setFormEntry, updateSpread}) => {
                         <div className={completed()}>{state.title}</div>
                     </span>
                     <div className='controls hidden'>
-                        <i className='pointer far fa-edit' onClick={() => setFormEntry(state)}></i>&nbsp;&nbsp;
+                        <i className='pointer far fa-edit' onClick={() => onSelect(state)}></i>&nbsp;&nbsp;
                         <i className='deleteBtn pointer far fa-window-close' onClick={() => deleteEntry()}></i>
                     </div>
                 </div>
@@ -42,4 +43,10 @@ export const Entry = ({entry, setFormEntry, updateSpread}) => {
             </div>
         </div>
     )
+}
+
+Entry.propType = {
+    entry: PropTypes.object,
+    onSelect: PropTypes.func,
+    onDelete: PropTypes.func
 }

@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import PropTypes from  'prop-types';
 import './Modal.scss'
 
 const MODAL_ID = 'theModal';
 
-export const Modal = ({children}) => {
+export const Modal = ({children, open, onClose}) => {
     window.onclick = function(e) {
-        if (e.target === GetModal()) HideModal();
-        if (e.target.parentElement === GetModal()) HideModal();     // Because of .flexCenter
+        if (e.target === getModal()) onClose();
+        if (e.target.parentElement === getModal()) onClose();  // Because of .flexCenter
     }
+    useEffect(() => {
+        open ? showModal() : hideModal();
+    }, [open])
 
     return (
         <div id={MODAL_ID} className='modalWrap'>
@@ -15,7 +19,7 @@ export const Modal = ({children}) => {
                 <div className='modal'>
 
                     <div className='closeWrap'>
-                        <i className='pointer far fa-window-close fa-lg' onClick={() => HideModal()}></i>
+                        <i className='pointer far fa-window-close fa-lg' onClick={() => onClose()}></i>
                     </div>
                     <div className='modalContent'>
                         {children}
@@ -25,11 +29,18 @@ export const Modal = ({children}) => {
             </div>
         </div>
     );
+};
+
+Modal.propTypes = {
+    open: PropTypes.bool,
+    onClose: PropTypes.func
+};
+
+
+const getModal = () => document.getElementById(MODAL_ID);
+function showModal() {
+    getModal().style.display = 'block';
 }
-const GetModal = () => document.getElementById(MODAL_ID);
-export function ShowModal() {
-    GetModal().style.display = "block";
-}
-export function HideModal() {
-    GetModal().style.display = "none";
+function hideModal() {
+    getModal().style.display = 'none';
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import { Reducer } from '../reducers/EntryFormReducer';
 import { Actions } from '../actions/EntryFormActions';
 import { InitialState } from '../state/EntryFormState';
@@ -6,26 +7,26 @@ import { format } from 'date-fns';
 import { AddEntry, UpdateEntry } from '../api/Entry';
 import './EntryForm.scss';
 
-export const EntryForm = ({entry, updateSpread}) => {
+export const EntryForm = ({entry, onUpdate}) => {
     const [state, dispatch] = useReducer(Reducer, entry ?? InitialState);
     useEffect(() => {
         if (entry !== undefined || entry !== null) {
             dispatch({type: Actions.SET_ENTRY, value: entry})
         }
-    }, [entry, dispatch])
+    }, [entry, dispatch]);
 
     async function submitForm(e) {
         e.preventDefault();
         if (state.id !== null)
             UpdateEntry(state)
                 .then(() => {
-                    updateSpread();
+                    onUpdate();
                     dispatch({type: Actions.CLEAR_INPUT});
                 });
         else
             AddEntry(state)
                 .then(() => {
-                    updateSpread();
+                    onUpdate();
                     dispatch({type: Actions.CLEAR_INPUT});
             });
     }
@@ -44,5 +45,11 @@ export const EntryForm = ({entry, updateSpread}) => {
             <input className='fancyBtn' type='submit' value='Submit' />
 
         </form>
-    )
-}
+    );
+};
+
+EntryForm.propTypes = {
+    entry: PropTypes.object,
+    setFormEntry: PropTypes.func,
+    onUpdate: PropTypes.func
+};

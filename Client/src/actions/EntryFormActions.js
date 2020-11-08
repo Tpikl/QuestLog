@@ -7,4 +7,4 @@ export const Actions = {
     FLIP_COMPLETED: 'flipCompleted',
     CLEAR_INPUT: 'clearInput',
     INITIAL_STATE: 'initialState'
-}
+};
