@@ -6,11 +6,13 @@ import './Day.scss';
 export const Day = ({day, entries, update, addEntry, editEntry}) => {
     return (
         <div className='day'>
-            <div className='dayHeader'>
-                <h3>{format(day, 'do - eeee')}</h3>
-                <i className="far fa-plus-square fa-lg" onClick={addEntry}></i>
+
+            <div className='dayHeader pointer'>
+                <h3>{format(day, 'do - eeee')}</h3>&nbsp;&nbsp;
+                <div className='flexCenter'>
+                    <i className="addBtn pointer far fa-plus-square" onClick={addEntry}></i>
+                </div>
             </div>
-            <hr />
 
             <div className='entries'>
                 {entries.map(x => {return (

@@ -5,11 +5,25 @@ h1, h2, h3, h4, h5 {
     margin: 0;  // No header is gonna have rogue margins in my projects!
 }
 
+// Flex things
+.flexCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 // Buttons
+.addBtn {
+    color: darkgreen;
+}
+.deleteBtn {
+    color: darkred;
+}
+
 .fancyBtn {
     margin: 5px;
     padding:0.35em 1.2em;
-     color:#000;
+    color:#000;
     background-color: transparent;
     border: 1px solid #000;
     border-radius: 3px;
@@ -20,6 +34,11 @@ h1, h2, h3, h4, h5 {
 }
 .fancyBtn:hover {
     color:#FFF;
-    background-color:#000000;
-    box-shadow: 0 0 10px #009700;
+    background-color:#aaa;
+    box-shadow: 0 0 10px 2px rgb(10, 102, 25);
+}
+
+// Other
+.pointer {
+    cursor: pointer;
 }

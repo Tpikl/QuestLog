@@ -1,13 +1,21 @@
 .day {
-    width: 100%;
+    margin: 1px;
     padding-bottom: 15px;
+}.day:hover {
+    border: 1px solid #aaa;
+    margin: 0;
 }
 
 .dayHeader {
+    padding: 5px 1px;
     display: flex;
-    justify-content: space-between;
+    transition: all 0.5s;
+}.dayHeader:hover {
+    background-color: #eee;
 }
 
 .entries {
-    padding:  0 5px;
+    padding:  0 10px;
+    display: flex;
+    flex-wrap: wrap;
 }

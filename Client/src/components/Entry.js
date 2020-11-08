@@ -23,18 +23,18 @@ export const Entry = ({entry, update, setFormEntry}) => {
     }
 
     return (
-        <div className={'entryBlock'}>
-            <div className='entry'>
+        <div className='entry'>
+            <div className='entryBlock'>
                 <div className='header'>
-                    <span className={'title'} onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
+                    <span className='pointer' onClick={() => dispatch({type: Actions.FLIP_COMPLETED})}>
                         <div style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.title}</div>
                     </span>
-                    <div className={'controls'}>
-                        <i className="far fa-edit fa-lg" onClick={() => setFormEntry(state)}></i>&nbsp;&nbsp;
-                        <i className="far fa-window-close fa-lg" onClick={() => deleteEntry()}></i>
+                    <div className='controls hidden'>
+                        <i className="pointer far fa-edit" onClick={() => setFormEntry(state)}></i>&nbsp;&nbsp;
+                        <i className="deleteBtn pointer far fa-window-close" onClick={() => deleteEntry()}></i>
                     </div>
                 </div>
-                <small className={'description controls'} style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
+                <small className='description hidden' style={state.completed ? {textDecoration: 'line-through'}:{}}>{state.description}</small>
             </div>
         </div>
     )
