@@ -10,6 +10,8 @@ export const Entry = ({entry, update, setFormEntry}) => {
         dispatch({type: Actions.SET_ENTRY, value: entry});
     }, [entry])
 
+    // TODO:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => updateEntry(), [state.completed]);
     async function updateEntry() {
         UpdateEntry(state)
