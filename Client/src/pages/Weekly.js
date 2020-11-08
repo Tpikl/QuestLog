@@ -3,7 +3,8 @@ import { startOfWeek, addDays } from 'date-fns';
 import { Day } from '../components/Day';
 import { Modal, ShowModal, HideModal } from '../shared/Modal';
 import { EntryForm } from '../forms/EntryForm';
-import { GetEntries } from '../api/Entry';
+import { GetEntriesByUserId } from '../api/Entry';
+import { TEST_USER_ID } from '../Const';
 import PropTypes from 'prop-types';
 import { InitialState } from '../state/EntryFormState';
 import './Weekly.scss';
@@ -24,7 +25,7 @@ export const Weekly = () => {
     // Pull entries
     const [entries, setEntries] = useState([]);
     function pullEntries() {
-        GetEntries()
+        GetEntriesByUserId(TEST_USER_ID)
         .then(r => {
             setEntries(r.data.map(e =>
                 ({...e, date: new Date(e.date)})
