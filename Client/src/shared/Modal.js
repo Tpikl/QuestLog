@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import PropTypes from  'prop-types';
 import './Modal.scss'
 
-const MODAL_ID = 'theModal';
+const MODAL_ID = 'THE_MODAL';
 
 export const Modal = ({children, open, onClose}) => {
     window.onclick = function(e) {
