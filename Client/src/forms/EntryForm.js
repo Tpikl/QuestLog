@@ -35,13 +35,13 @@ export const EntryForm = ({entry, update}) => {
 
             <b className='formDate'>{format(state.date, 'do - eeee')}</b>
 
-            <label htmlFor="title">Title:</label>
-            <input id="title" type='text' value={state.title} onChange={e => dispatch({type: Actions.SET_TITLE, value: e.target.value})} />
+            <label htmlFor='title'>Title:</label>
+            <input id='title' type='text' value={state.title} onChange={e => dispatch({type: Actions.SET_TITLE, value: e.target.value})} />
 
-            <label htmlFor="description">Description:</label>
-            <input id="description" type='text' value={state.description} onChange={e => dispatch({type: Actions.SET_DESCIPTION, value: e.target.value})} />
+            <label htmlFor='description'>Description:</label>
+            <input id='description' type='text' value={state.description} onChange={e => dispatch({type: Actions.SET_DESCIPTION, value: e.target.value})} />
 
-            <input className='fancyBtn' type="submit" value="Submit" />
+            <input className='fancyBtn' type='submit' value='Submit' />
 
         </form>
     )
