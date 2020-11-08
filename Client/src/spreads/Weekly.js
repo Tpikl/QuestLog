@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 
 import { Modal, ShowModal, HideModal } from '../shared/Modal';
 import { InitialState } from '../state/EntryFormState';
-import { GetEntriesByUserId } from '../api/Entry';
+import { ByDateRange } from '../api/Entry';
 import { EntryForm } from '../forms/EntryForm';
-import { WeekDays } from '../util/WeekDays';
+import { EndOfThisWeek, StartOfThisWeek, WeekDays } from '../util/WeekDays';
 import { Day } from '../components/Day';
-import { TEST_USER_ID } from '../Const';
 
 import './Weekly.scss';
 
@@ -15,8 +14,8 @@ import './Weekly.scss';
 export const Weekly = () => {
     // Initialize Weekly data.
     const [weekEntries, setWeekEntries] = useState([]);
-    function WeeklyInit() {
-        GetEntriesByUserId(TEST_USER_ID)
+    function weeklyInit() {
+        ByDateRange(StartOfThisWeek(), EndOfThisWeek())
         .then(r => {
             setWeekEntries(r.data.map(e =>
                 ({...e, date: new Date(e.date)})
@@ -24,7 +23,8 @@ export const Weekly = () => {
         });
 
     }
-    useEffect(() => {WeeklyInit()}, [])    // Run init on first draw.
+    // Run init on first draw.
+    useEffect(() => weeklyInit(), [])
 
     const entriesByDay = (day) => {
         let e = [];
@@ -48,21 +48,21 @@ export const Weekly = () => {
         <center><h1>-Weekly-</h1></center>
 
         <div className='weekly'>
-            {WeekDays().map((item, i) => {
+            {WeekDays(new Date()).map((item, i) => {
                 return (<Day 
                     key={i}
                     day={item}
                     entries={entriesByDay(i)}
                     addEntry={() => addEntry(item)}
                     editEntry={updateFormEntry}
-                    update={() => WeeklyInit()} />)
+                    updateSpread={() => weeklyInit()} />)
             })}
         </div>
 
         <Modal>
             <EntryForm
                 entry={formEntry}
-                update={() => {WeeklyInit(); HideModal();}} />
+                updateSpread={() => {weeklyInit(); HideModal();}} />
         </Modal>
     </>);
 }

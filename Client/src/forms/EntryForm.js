@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { AddEntry, UpdateEntry } from '../api/Entry';
 import './EntryForm.scss';
 
-export const EntryForm = ({entry, update}) => {
+export const EntryForm = ({entry, updateSpread}) => {
     const [state, dispatch] = useReducer(Reducer, entry ?? InitialState);
     useEffect(() => {
         if (entry !== undefined || entry !== null) {
@@ -19,13 +19,13 @@ export const EntryForm = ({entry, update}) => {
         if (state.id !== null)
             UpdateEntry(state)
                 .then(() => {
-                    update();
+                    updateSpread();
                     dispatch({type: Actions.CLEAR_INPUT});
                 });
         else
             AddEntry(state)
                 .then(() => {
-                    update();
+                    updateSpread();
                     dispatch({type: Actions.CLEAR_INPUT});
             });
     }

@@ -4,7 +4,7 @@ import { Reducer } from '../reducers/EntryFormReducer';
 import { Actions } from '../actions/EntryFormActions';
 import './Entry.scss';
 
-export const Entry = ({entry, update, setFormEntry}) => {
+export const Entry = ({entry, setFormEntry, updateSpread}) => {
     const [state, dispatch] = useReducer(Reducer, entry)
     useEffect(() => {
         dispatch({type: Actions.SET_ENTRY, value: entry});
@@ -15,11 +15,11 @@ export const Entry = ({entry, update, setFormEntry}) => {
     useEffect(() => updateEntry(), [state.completed]);
     async function updateEntry() {
         UpdateEntry(state)
-            .then(() => update());
+            .then(() => updateSpread());
     }
     async function deleteEntry() {
         DeleteEntry(state.id)
-            .then(() => update());
+            .then(() => updateSpread());
     }
 
     const completed = () => {

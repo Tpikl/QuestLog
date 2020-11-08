@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { format } from 'date-fns';
 import { API_BASE } from './Api';
 
 const ENTRY_URL = `${API_BASE}/entry`;
+const DATE_FORMAT = 'yyyy-MM-dd';
 
 // Base API Methods
 export async function GetEntry(id) {
@@ -22,6 +24,6 @@ export async function DeleteEntry(id) {
 
 
 // Other Methods
-export async function GetEntriesByUserId(id) {
-    return axios.get(`${ENTRY_URL}/getbyuserid/${id}`);
+export async function ByDateRange(start, end) {
+    return axios(`${ENTRY_URL}/ByDateRange/?start=${format(start, DATE_FORMAT)}&end=${format(end, DATE_FORMAT)}`);
 }

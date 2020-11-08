@@ -17,13 +17,10 @@ namespace QuestLog.Api
             _entryRepository = repository;
         }
 
+        #region Core Methods
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
             => Ok(_entryRepository.Get(id));
-
-        [HttpGet("GetByUserId/{userId}")]
-        public IActionResult GetByUserId(Guid userId)
-            => Ok(_entryRepository.GetByUserId(userId));
 
         [HttpPost]
         public IActionResult Add([FromBody] EntryForm form)
@@ -50,5 +47,13 @@ namespace QuestLog.Api
             _entryRepository.Delete(id);
             return Ok();
         }
+        #endregion
+
+
+        #region Other Methods
+        [HttpGet("ByDateRange")]
+        public IActionResult ByDateRange(DateTime start, DateTime end)
+            => Ok(_entryRepository.GetByDateRange(start, end));
+        #endregion
     }
 }

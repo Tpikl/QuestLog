@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { Entry } from './Entry';
 import './Day.scss';
 
-export const Day = ({day, entries, update, addEntry, editEntry}) => {
+export const Day = ({day, entries, addEntry, editEntry, updateSpread}) => {
     return (
         <div className='day'>
 
@@ -16,7 +16,7 @@ export const Day = ({day, entries, update, addEntry, editEntry}) => {
 
             <div className='entries'>
                 {entries.map(x => {return (
-                    <Entry key={x.id} entry={x} update={update} setFormEntry={editEntry} />
+                    <Entry key={x.id} entry={x} setFormEntry={editEntry} updateSpread={updateSpread} />
                 )})}
             </div>
 

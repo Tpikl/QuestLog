@@ -8,10 +8,11 @@ namespace QuestLog.Repository
     public interface IEntryRepository
     {
         Entry Get(Guid Id);
-        List<Entry> GetByUserId(Guid userId);
         void Add(Entry entry);
         void Update(Entry entry);
         void Delete(Guid entryId);
+
+        List<Entry> GetByDateRange(DateTime start, DateTime end);
     }
 
     public class EntryRepository : IEntryRepository
@@ -25,9 +26,6 @@ namespace QuestLog.Repository
 
         public Entry Get(Guid Id)
             => _context.Entries.FirstOrDefault(x => x.Id == Id);
-
-        public List<Entry> GetByUserId(Guid userId)
-            => _context.Entries.Where(x => x.UserId == userId).ToList();
 
         public void Add(Entry entry)
         {
@@ -47,5 +45,9 @@ namespace QuestLog.Repository
             _context.Entries.Remove(Get(entryId));
             _context.SaveChanges();
         }
+
+
+        public List<Entry> GetByDateRange(DateTime start, DateTime end)
+            => _context.Entries.Where(x => x.Date >= start && x.Date <= end).ToList();
     }
 }
