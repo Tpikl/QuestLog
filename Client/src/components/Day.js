@@ -8,7 +8,7 @@ export const Day = ({day, entries, update, addEntry, editEntry}) => {
         <div className='day'>
 
             <div className='dayHeader pointer'>
-                <h3>{format(day, 'do - eeee')}</h3>&nbsp;&nbsp;
+                <h3>[{format(day, 'do')}] - {format(day, 'eeee')}</h3>&nbsp;&nbsp;
                 <div className='flexCenter'>
                     <i className='addBtn pointer far fa-plus-square' onClick={addEntry}></i>
                 </div>
