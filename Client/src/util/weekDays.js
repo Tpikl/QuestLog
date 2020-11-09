@@ -11,4 +11,4 @@ export const weekDays = (date) => {
 }
 
 export const startOfThisWeek = () => startOfWeek(new Date());
-export const endOfThisWeek = () => addDays(startOfWeek(new Date()), 7);
+export const endOfThisWeek = () => addDays(startOfWeek(new Date()), 6);
