@@ -9,11 +9,8 @@ export const Modal = ({children, open, onClose}) => {
         if (e.target === getModal()) onClose();
         if (e.target.parentElement === getModal()) onClose();  // Because of .flexCenter
     };
-    useEffect(() => {
-        open ? showModal() : hideModal();
-    }, [open]);
 
-    return (
+    return open && (
         <div id={MODAL_ID} className='modalWrap'>
             <div className='flexCenter'>
                 <div className='modal'>
@@ -30,17 +27,9 @@ export const Modal = ({children, open, onClose}) => {
         </div>
     );
 };
+const getModal = () => document.getElementById(MODAL_ID);
 
 Modal.propTypes = {
     open: PropTypes.bool,
     onClose: PropTypes.func
 };
-
-
-const getModal = () => document.getElementById(MODAL_ID);
-function showModal() {
-    getModal().style.display = 'block';
-}
-function hideModal() {
-    getModal().style.display = 'none';
-}
