@@ -41,7 +41,7 @@ export const Weekly = () => {
     };
 
     return (<>
-        <center><h1>-Weekly-</h1></center>
+        <center><h1>-Weekly Spread-</h1></center>
 
         <div className='weekly'>
             {weekDays(new Date()).map((item, i) => {

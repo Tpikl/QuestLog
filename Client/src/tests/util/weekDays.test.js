@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { weekDays, startOfThisWeek, endOfThisWeek } from '../util/weekDays';
+import { weekDays, startOfThisWeek, endOfThisWeek } from '../../util/weekDays';
 
 const now = new Date();
 const DATE_FORMAT = 'yyy-MM-dd';
