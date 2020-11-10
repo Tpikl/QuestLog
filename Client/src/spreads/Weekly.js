@@ -11,13 +11,13 @@ import './Weekly.scss';
 
 
 export const Weekly = ({startDate}) => {
-    // Run init on first draw.
-    useEffect(() => weeklyInit(), []);
+    // Handle startDate
+    useEffect(() => weeklyInit(), [startDate]);
 
     // Initialize Weekly data.
     const [weekEntries, setWeekEntries] = useState([]);
     function weeklyInit() {
-        ByDateRange(startOfThisWeek(), endOfThisWeek())
+        ByDateRange(startOfThisWeek(startDate), endOfThisWeek(startDate))
         .then(r => {
             setWeekEntries(r.data.map(e =>
                 ({...e, date: new Date(e.date)})

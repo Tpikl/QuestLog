@@ -32,7 +32,7 @@ export const EntryForm = ({entry, onUpdate}) => {
     }
 
     return (
-        <form onSubmit={(e) => submitForm(e)}>
+        <form onSubmit={e => submitForm(e)}>
 
             <b className='formDate'>{format(state.date, 'do - eeee')}</b>
 

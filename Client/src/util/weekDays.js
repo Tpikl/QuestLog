@@ -1,4 +1,4 @@
-import { addDays, startOfWeek } from 'date-fns';
+    import { addDays, startOfWeek } from 'date-fns';
 
 export const weekDays = (date) => {
     let days = []
@@ -10,5 +10,5 @@ export const weekDays = (date) => {
     return days;
 }
 
-export const startOfThisWeek = () => startOfWeek(new Date());
-export const endOfThisWeek = () => addDays(startOfWeek(new Date()), 6);
+export const startOfThisWeek = date => startOfWeek(date);
+export const endOfThisWeek = date => addDays(startOfWeek(date), 6);
