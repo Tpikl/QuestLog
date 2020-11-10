@@ -15,7 +15,7 @@ export const EntryForm = ({entry, onUpdate}) => {
         }
     }, [entry, dispatch]);
 
-    async function submitForm(e) {
+    function submitForm(e) {
         e.preventDefault();
         if (state.id !== null)
             UpdateEntry(state)

@@ -5,6 +5,6 @@ import './Home.scss';
 
 export const Home = () => {
     return (
-        <Weekly />
+        <Weekly startDate={new Date()} />
     );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Modal } from '../shared/Modal';
 import { InitialState } from '../state/entry';
 import { ByDateRange } from '../api/entry';
@@ -9,7 +10,7 @@ import { Day } from '../components/Day';
 import './Weekly.scss';
 
 
-export const Weekly = () => {
+export const Weekly = ({startDate}) => {
     // Run init on first draw.
     useEffect(() => weeklyInit(), []);
 
@@ -44,7 +45,7 @@ export const Weekly = () => {
         <center><h1>-Weekly Spread-</h1></center>
 
         <div className='weekly'>
-            {weekDays(new Date()).map((item, i) => {
+            {weekDays(startDate).map((item, i) => {
                 return (<Day 
                     key={i}
                     day={item}
@@ -60,4 +61,8 @@ export const Weekly = () => {
                 onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
         </Modal>
     </>);
+};
+
+Weekly.propTypes = {
+    startDate: PropTypes.instanceOf(Date)
 };
