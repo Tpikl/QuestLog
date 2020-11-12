@@ -17,18 +17,9 @@ export const EntryForm = ({entry, onUpdate}) => {
 
     function submitForm(e) {
         e.preventDefault();
-        if (state.id !== null)
-            UpdateEntry(state)
-                .then(() => {
-                    onUpdate();
-                    dispatch({type: Actions.CLEAR_INPUT});
-                });
-        else
-            AddEntry(state)
-                .then(() => {
-                    onUpdate();
-                    dispatch({type: Actions.CLEAR_INPUT});
-            });
+        (state.id !== null)
+            ? UpdateEntry(state).then(() => onUpdate())
+            : AddEntry(state).then(() => onUpdate())
     }
 
     return (
