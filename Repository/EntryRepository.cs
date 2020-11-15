@@ -48,6 +48,6 @@ namespace QuestLog.Repository
 
 
         public List<Entry> GetByDateRange(DateTime start, DateTime end)
-            => _context.Entries.Where(x => x.Date >= start && x.Date <= end).ToList();
+            => _context.Entries.Where(x => x.Date.Date >= start.Date && x.Date.Date <= end.Date).ToList();
     }
 }
