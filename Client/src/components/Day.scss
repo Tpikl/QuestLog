@@ -1,17 +1,10 @@
 .day {
+    display: inline-block;
     margin: 1px;
     padding-bottom: 15px;
 }.day:hover {
     border: 1px solid #AAA;
     margin: 0;
-}
-
-.dayHeader {
-    display: flex;
-    padding: 5px 1px;
-    transition: all 0.5s;
-}.dayHeader:hover {
-    background-color: #AAA;
 }
 
 .dayTitle {

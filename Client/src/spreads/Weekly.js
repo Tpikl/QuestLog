@@ -6,6 +6,8 @@ import { ByDateRange } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
 import { endOfThisWeek, startOfThisWeek, weekDays } from '../util/weekDays';
 import { Day } from '../components/Day';
+import Todo from '../components/Todo';
+import Notes from '../components/Notes';
 
 import './Weekly.scss';
 
@@ -43,18 +45,25 @@ export const Weekly = ({startDate}) => {
 
     return (<>
         <center><h1>-Weekly Spread-</h1></center>
+        <div className='weekSpread'>
 
-        <div className='weekly'>
-            {weekDays(startDate).map((item, i) => {
-                return (<Day 
-                    key={i}
-                    day={item}
-                    entries={entriesByDay(i)}
-                    onSelect={selectModal}
-                    onUpdate={() => weeklyInit()} />)
-            })}
+            <div className='weekly'>
+                {weekDays(startDate).map((item, i) => {
+                    return (<Day 
+                        key={i}
+                        day={item}
+                        entries={entriesByDay(i)}
+                        onSelect={selectModal}
+                        onUpdate={() => weeklyInit()} />)
+                })}
+            </div>
+
+            <div className='side'>
+                <Todo />
+                <Notes />
+            </div>
+
         </div>
-
         <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
             <EntryForm
                 entry={selectedEntry}

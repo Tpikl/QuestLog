@@ -14,7 +14,7 @@ export const Day = ({day, entries, onSelect, onUpdate}) => {
     return (
         <div className='day'>
 
-            <div className='dayHeader pointer'>
+            <div className='titleHeader pointer'>
                 <div className={today()}>[{format(day, 'do')}] - {format(day, 'eeee')}</div>&nbsp;&nbsp;
                 <div className='flexCenter'>
                     <i className='addBtn pointer far fa-plus-square' onClick={() => {onSelect({...InitialState, date: day})}}></i>

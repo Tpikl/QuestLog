@@ -1,7 +1,18 @@
+.weekSpread
+{
+    display: flex;
+}
+
 .weekly {
     padding: 5px;
     margin-left: 25px;
     display: inline-flex;
     flex-direction: column;
     border-left: 2px solid #555;
+    flex-basis: 100%;
+}
+
+.side {
+    padding: 5px;
+    flex-basis: 100%;
 }
