@@ -7,5 +7,6 @@ namespace QuestLog.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Date { get; set; }
+        public int DisplayArea { get; set; }
     }
 }

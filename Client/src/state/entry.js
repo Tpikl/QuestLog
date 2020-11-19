@@ -5,5 +5,6 @@ export const InitialState =  {
     date: new Date(),
     endDate: null,
     completed: false,
+    displayArea: 0,
     userId: ''
 };

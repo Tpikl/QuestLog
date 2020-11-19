@@ -30,7 +30,16 @@ export const Weekly = ({startDate}) => {
     const entriesByDay = (day) => {
         let e = [];
         weekEntries.forEach(item => {
-            if (item.date.getDay() === day) e.push(item);
+            if (item.date.getDay() === day && item.displayArea === 0)
+                e.push(item);
+        });
+        return e;
+    };
+
+    const entriesByToDo = () => {
+        let e = [];
+        weekEntries.forEach(item => {
+            if (item.displayArea === 1) e.push(item);
         });
         return e;
     };
@@ -59,7 +68,10 @@ export const Weekly = ({startDate}) => {
             </div>
 
             <div className='side'>
-                <Todo />
+                <Todo
+                    entries={entriesByToDo()}
+                    onSelect={selectModal}
+                    onUpdate={() => weeklyInit()}/>
                 <Notes />
             </div>
 

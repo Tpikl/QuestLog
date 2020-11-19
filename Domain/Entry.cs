@@ -9,7 +9,15 @@ namespace QuestLog.Domain
         public DateTime Date { get; set; }
         public DateTime? EndDate { get; set; }
         public bool Completed { get; set; }
+        public int DisplayArea { get; set; }
 
         public Guid UserId { get; set; }
+    }
+
+    public enum DisplayArea
+    {
+        day,
+        week,
+        note
     }
 }

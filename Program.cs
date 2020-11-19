@@ -31,7 +31,8 @@ namespace QuestLog
                     UserId = new Guid(Const.TestUserId),
                     Title = "Today's Task!",
                     Description = "Do stuff with this.",
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    DisplayArea = (int)DisplayArea.day
                 });
 
                 context.SaveChanges();

@@ -29,6 +29,7 @@ namespace QuestLog.Api
                 Title = form.Title,
                 Description = form.Description,
                 Date = DateTime.Parse(form.Date),
+                DisplayArea = form.DisplayArea,
                 UserId = new Guid(Const.TestUserId)
             });
             return Ok();
