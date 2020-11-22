@@ -2,12 +2,12 @@ import React from 'react';
 import { Entry } from './Entry';
 import { InitialState } from '../state/entry';
 
-const EntryList = ({area, num, style, entries, onSelect, onUpdate}) => {
+const EntryList = ({area, num, styleOption, entries, onSelect, onUpdate}) => {
 
     return (
         <div className='todo'>
             <div className='titleHeader pointer'>
-                <div className={style}>{area}:</div>&nbsp;&nbsp;
+                <div className={styleOption}>{area}:</div>&nbsp;&nbsp;
                 <div className='flexCenter'>
                     <i className='addBtn pointer far fa-plus-square' onClick={() => {onSelect({...InitialState, date: new Date(), displayArea: num})}}></i>
                 </div>
