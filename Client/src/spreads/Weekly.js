@@ -4,8 +4,7 @@ import { Modal } from '../shared/Modal';
 import { InitialState, DisplayAreas } from '../state/entry';
 import { ByDateRange } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
-import { endOfThisWeek, startOfThisWeek, weekDays } from '../util/weekDays';
-import { format } from 'date-fns';
+import { dateFormat, endOfThisWeek, startOfThisWeek, weekDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
 
 import './Weekly.scss';
@@ -52,7 +51,7 @@ export const Weekly = ({startDate}) => {
     };
 
     const today = (day) => {
-        return format(new Date(), 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd')
+        return dateFormat(new Date()) === dateFormat(day)
             ? 'dayTitle' : '';
     };
 
@@ -65,7 +64,7 @@ export const Weekly = ({startDate}) => {
                     return (
                         <EntryList
                             key={i}
-                            area={`[${format(item, 'do')}] - ${format(item, 'eeee')}`}
+                            area={weeklyFormat(item)}
                             num={0}
                             styleOption={today(item)}
                             entries={entriesByDay(i)}
