@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { isToday } from 'date-fns';
 import { Modal } from '../shared/Modal';
 import { InitialState, DisplayAreas } from '../state/entry';
 import { ByDateRange } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
-import { dateFormat, endOfThisWeek, startOfThisWeek, weekDays, weeklyFormat } from '../util/weekDays';
+import { endOfThisWeek, startOfThisWeek, weekDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
+import { StyledEntryList } from '../components/EntryList.styled';
 
 import './Weekly.scss';
 
@@ -33,7 +35,6 @@ export const Weekly = ({startDate}) => {
         });
         return e;
     };
-
     const entriesByArea = (area) => {
         let e = [];
         weekEntries.forEach(item => {
@@ -50,11 +51,6 @@ export const Weekly = ({startDate}) => {
         setModalOpen(true);
     };
 
-    const today = (day) => {
-        return dateFormat(new Date()) === dateFormat(day)
-            ? 'dayTitle' : '';
-    };
-
     return (<>
         <center><h1>-Weekly Spread-</h1></center>
         <div className='weekSpread'>
@@ -62,33 +58,34 @@ export const Weekly = ({startDate}) => {
             <div className='weekly'>
                 {weekDays(startDate).map((item, i) => {
                     return (
-                        <EntryList
-                            key={i}
-                            area={weeklyFormat(item)}
-                            num={0}
-                            styleOption={today(item)}
-                            entries={entriesByDay(i)}
-                            onSelect={selectModal}
-                            onUpdate={() => weeklyInit()}/>
+                        <StyledEntryList boldTitle={isToday(item)}>
+                            <EntryList
+                                key={i}
+                                area={weeklyFormat(item)}
+                                num={0}
+                                entries={entriesByDay(i)}
+                                onSelect={selectModal}
+                                onUpdate={() => weeklyInit()}/>
+                        </StyledEntryList>
                     )
                 })}
             </div>
 
             <div className='side'>
-                <EntryList
-                    area={'To Do'}
-                    num={1}
-                    styleOption={'dayTitle'}
-                    entries={entriesByArea(DisplayAreas.week)}
-                    onSelect={selectModal}
-                    onUpdate={() => weeklyInit()}/>
-                <EntryList
-                    area={'Notes'}
-                    num={2}
-                    styleOption={'dayTitle'}
-                    entries={entriesByArea(DisplayAreas.note)}
-                    onSelect={selectModal}
-                    onUpdate={() => weeklyInit()}/>
+                <StyledEntryList boldTitle={true}>
+                    <EntryList
+                        area={'To Do'}
+                        num={1}
+                        entries={entriesByArea(DisplayAreas.week)}
+                        onSelect={selectModal}
+                        onUpdate={() => weeklyInit()}/>
+                    <EntryList
+                        area={'Notes'}
+                        num={2}
+                        entries={entriesByArea(DisplayAreas.note)}
+                        onSelect={selectModal}
+                        onUpdate={() => weeklyInit()}/>
+                </StyledEntryList>
             </div>
 
         </div>

@@ -4,12 +4,12 @@ import { InitialState } from '../state/entry';
 
 import './EntryList.scss';
 
-const EntryList = ({area, num, styleOption, entries, onSelect, onUpdate}) => {
+const EntryList = ({area, num, entries, onSelect, onUpdate}) => {
 
     return (
         <div className='entryList'>
             <div className='titleHeader pointer'>
-                <div className={styleOption}>{area}:</div>&nbsp;&nbsp;
+                <div className={'title'}>{area}:</div>&nbsp;&nbsp;
                 <div className='flexCenter'>
                     <i className='addBtn pointer far fa-plus-square' onClick={() => {onSelect({...InitialState, date: new Date(), displayArea: num})}}></i>
                 </div>
