@@ -1,6 +1,8 @@
 import React from 'react';
+import { Entry } from './Entry';
+import { InitialState } from '../state/entry';
 
-const Notes = () => {
+const Notes = ({entries, onSelect, onUpdate}) => {
 
 
     return (
@@ -8,8 +10,14 @@ const Notes = () => {
             <div className='titleHeader pointer'>
                 <h3>Notes:</h3>&nbsp;&nbsp;
                 <div className='flexCenter'>
-                    <i className='addBtn pointer far fa-plus-square' onClick={() => {}}></i>
+                    <i className='addBtn pointer far fa-plus-square' onClick={() => {onSelect({...InitialState, date: new Date(), displayArea: 2})}}></i>
                 </div>
+            </div>
+
+            <div>
+                {entries.map(x => {return (
+                        <Entry key={x.id} entry={x} onSelect={onSelect} onUpdate={onUpdate} />
+                    )})}
             </div>
         </div>
     );

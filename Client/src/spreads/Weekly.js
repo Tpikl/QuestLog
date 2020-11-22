@@ -43,6 +43,13 @@ export const Weekly = ({startDate}) => {
         });
         return e;
     };
+    const entriesByNotes = () => {
+        let e = [];
+        weekEntries.forEach(item => {
+            if (item.displayArea === 2) e.push(item);
+        });
+        return e;
+    };
 
     // Modal control
     const [modalOpen, setModalOpen] = useState(false);
@@ -72,7 +79,10 @@ export const Weekly = ({startDate}) => {
                     entries={entriesByToDo()}
                     onSelect={selectModal}
                     onUpdate={() => weeklyInit()}/>
-                <Notes />
+                <Notes
+                    entries={entriesByNotes()}
+                    onSelect={selectModal}
+                    onUpdate={() => weeklyInit()}/>
             </div>
 
         </div>
