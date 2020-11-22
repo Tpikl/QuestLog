@@ -1,0 +1,13 @@
+.entryList {
+    display: inline-block;
+    margin: 1px;
+    padding-bottom: 15px;
+}.entryList:hover {
+    border: 1px solid #AAA;
+    margin: 0;
+}
+.entries {
+    padding:  0 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
