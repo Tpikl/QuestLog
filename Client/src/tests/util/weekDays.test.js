@@ -11,13 +11,17 @@ function testFormat(date) {
 };
 
 test('weekDays: Full week of 7 days.', () =>
-    expect(testWeek.length).toBe(7));
+    expect(testWeek.length).toBe(7)
+);
 
 test('weekDays: This week. Today must exist in array.', () => 
-    expect(testFormat(testWeek[now.getDay()])).toBe(nowFormatted));
+    expect(testFormat(testWeek[now.getDay()])).toBe(nowFormatted)
+);
 
 test('startOfThisWeek: Confirm correct.', () => 
-    expect(testFormat(testWeek[0])).toBe(testFormat(startOfThisWeek())));
+    expect(testFormat(testWeek[0])).toBe(testFormat(startOfThisWeek(now)))
+);
 
 test('endOfThisWeek: Confirm correct.', () => 
-    expect(testFormat(testWeek[6])).toBe(testFormat(endOfThisWeek())));
+    expect(testFormat(testWeek[6])).toBe(testFormat(endOfThisWeek(now)))
+);
