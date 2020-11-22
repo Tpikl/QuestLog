@@ -5,9 +5,8 @@ import { InitialState } from '../state/entry';
 import { ByDateRange } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
 import { endOfThisWeek, startOfThisWeek, weekDays } from '../util/weekDays';
-import { Day } from '../components/Day';
-import Todo from '../components/Todo';
-import Notes from '../components/Notes';
+import { format } from 'date-fns';
+import EntryList from '../components/EntryList';
 
 import './Weekly.scss';
 
@@ -59,27 +58,42 @@ export const Weekly = ({startDate}) => {
         setModalOpen(true);
     };
 
+    const today = (day) => {
+        return format(new Date(), 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd')
+            ? 'dayTitle' : '';
+    };
+
     return (<>
         <center><h1>-Weekly Spread-</h1></center>
         <div className='weekSpread'>
 
             <div className='weekly'>
                 {weekDays(startDate).map((item, i) => {
-                    return (<Day 
-                        key={i}
-                        day={item}
-                        entries={entriesByDay(i)}
-                        onSelect={selectModal}
-                        onUpdate={() => weeklyInit()} />)
+                    return (
+                        <EntryList
+                            key={i}
+                            area={`[${format(item, 'do')}] - ${format(item, 'eeee')}`}
+                            num={0}
+                            style={today(item)}
+                            entries={entriesByDay(i)}
+                            onSelect={selectModal}
+                            onUpdate={() => weeklyInit()}/>
+                    )
                 })}
             </div>
 
             <div className='side'>
-                <Todo
+                <EntryList
+                    area={'To Do'}
+                    num={1}
+                    style={''}
                     entries={entriesByToDo()}
                     onSelect={selectModal}
                     onUpdate={() => weeklyInit()}/>
-                <Notes
+                <EntryList
+                    area={'Notes'}
+                    num={2}
+                    style={''}
                     entries={entriesByNotes()}
                     onSelect={selectModal}
                     onUpdate={() => weeklyInit()}/>
