@@ -8,3 +8,9 @@ export const InitialState =  {
     displayArea: 0,
     userId: ''
 };
+
+export const DisplayAreas = {
+    day: 0,
+    week: 1,
+    note: 2
+}

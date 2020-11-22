@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from '../shared/Modal';
-import { InitialState } from '../state/entry';
+import { InitialState, DisplayAreas } from '../state/entry';
 import { ByDateRange } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
 import { endOfThisWeek, startOfThisWeek, weekDays } from '../util/weekDays';
@@ -29,23 +29,16 @@ export const Weekly = ({startDate}) => {
     const entriesByDay = (day) => {
         let e = [];
         weekEntries.forEach(item => {
-            if (item.date.getDay() === day && item.displayArea === 0)
+            if (item.date.getDay() === day && item.displayArea === DisplayAreas.day)
                 e.push(item);
         });
         return e;
     };
 
-    const entriesByToDo = () => {
+    const entriesByArea = (area) => {
         let e = [];
         weekEntries.forEach(item => {
-            if (item.displayArea === 1) e.push(item);
-        });
-        return e;
-    };
-    const entriesByNotes = () => {
-        let e = [];
-        weekEntries.forEach(item => {
-            if (item.displayArea === 2) e.push(item);
+            if (item.displayArea === area) e.push(item);
         });
         return e;
     };
@@ -86,15 +79,15 @@ export const Weekly = ({startDate}) => {
                 <EntryList
                     area={'To Do'}
                     num={1}
-                    styleOption={''}
-                    entries={entriesByToDo()}
+                    styleOption={'dayTitle'}
+                    entries={entriesByArea(DisplayAreas.week)}
                     onSelect={selectModal}
                     onUpdate={() => weeklyInit()}/>
                 <EntryList
                     area={'Notes'}
                     num={2}
-                    styleOption={''}
-                    entries={entriesByNotes()}
+                    styleOption={'dayTitle'}
+                    entries={entriesByArea(DisplayAreas.note)}
                     onSelect={selectModal}
                     onUpdate={() => weeklyInit()}/>
             </div>
