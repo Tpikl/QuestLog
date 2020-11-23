@@ -15,7 +15,6 @@ export const StyledEntryList = styled.div
         flex-wrap: wrap;
     }
 
-    //DELETE SOON
     ${({boldTitle}) => boldTitle ? `
         .title {
             font-weight: bold;

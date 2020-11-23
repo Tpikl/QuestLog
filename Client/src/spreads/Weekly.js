@@ -58,9 +58,8 @@ export const Weekly = ({startDate}) => {
             <div className='weekly'>
                 {weekDays(startDate).map((item, i) => {
                     return (
-                        <StyledEntryList boldTitle={isToday(item)}>
+                        <StyledEntryList key={i} boldTitle={isToday(item)}>
                             <EntryList
-                                key={i}
                                 area={weeklyFormat(item)}
                                 num={0}
                                 entries={entriesByDay(i)}

@@ -2,8 +2,6 @@ import React from 'react';
 import { Entry } from './Entry';
 import { InitialState } from '../state/entry';
 
-import './EntryList.scss';
-
 const EntryList = ({area, num, entries, onSelect, onUpdate}) => {
 
     return (

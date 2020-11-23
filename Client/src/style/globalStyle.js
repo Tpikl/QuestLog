@@ -15,6 +15,14 @@ const GlobalStyle = createGlobalStyle
     .deleteBtn {
         color: ${({theme}) => theme.primaryRed};
     }
+
+    .titleHeader {
+        display: flex;
+        padding: 5px 1px;
+        transition: all 0.5s;
+    }.titleHeader:hover {
+        background-color: #AAA;
+    }
 `;
 
 export default GlobalStyle;
