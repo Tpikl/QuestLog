@@ -30,7 +30,7 @@ export const Weekly = ({startDate}) => {
     const entriesByDay = (day) => {
         let e = [];
         weekEntries.forEach(item => {
-            if (item.date.getDay() === day && item.displayArea === DisplayAreas.day)
+            if (item.date.getDay() === day && item.displayArea === DisplayAreas.Day.id)
                 e.push(item);
         });
         return e;
@@ -59,8 +59,7 @@ export const Weekly = ({startDate}) => {
                     return (
                         <StyledEntryList key={i} boldTitle={isToday(item)}>
                             <EntryList
-                                area={weeklyFormat(item)}
-                                num={0}
+                                area={{...DisplayAreas.day, name: weeklyFormat(item)}}
                                 day={item}
                                 entries={entriesByDay(i)}
                                 onSelect={selectModal}
@@ -73,17 +72,15 @@ export const Weekly = ({startDate}) => {
             <div className='side'>
                 <StyledEntryList boldTitle={true}>
                     <EntryList
-                        area={'To Do'}
-                        num={1}
+                        area={DisplayAreas.Todo}
                         day={null}
-                        entries={entriesByArea(DisplayAreas.week)}
+                        entries={entriesByArea(DisplayAreas.Todo.id)}
                         onSelect={selectModal}
                         onUpdate={() => weeklyInit()}/>
                     <EntryList
-                        area={'Notes'}
-                        num={2}
+                        area={DisplayAreas.Note}
                         day={null}
-                        entries={entriesByArea(DisplayAreas.note)}
+                        entries={entriesByArea(DisplayAreas.Note.id)}
                         onSelect={selectModal}
                         onUpdate={() => weeklyInit()}/>
                 </StyledEntryList>

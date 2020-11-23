@@ -10,7 +10,7 @@ export const InitialState =  {
 };
 
 export const DisplayAreas = {
-    day: 0,
-    week: 1,
-    note: 2
+    Day: {id: 0, name: '[[Replace Me]]'},
+    Todo: {id: 1, name: 'To Do'},
+    Note: {id: 2, name: 'Notes'}
 }

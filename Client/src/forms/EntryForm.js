@@ -25,7 +25,7 @@ export const EntryForm = ({entry, onUpdate}) => {
     return (
         <form onSubmit={e => submitForm(e)}>
 
-            {entry.displayArea === DisplayAreas.day && <>
+            {entry.displayArea === DisplayAreas.Day.id && <>
                 <b className='formDate'>{format(state.date, 'do - eeee')}</b>
             </>}
 
@@ -37,7 +37,7 @@ export const EntryForm = ({entry, onUpdate}) => {
             <input id='description' type='text' value={state.description}
                 onChange={e => dispatch({type: Actions.SET_DESCIPTION, value: e.target.value})} />
 
-            {entry.displayArea === DisplayAreas.day && <>
+            {entry.displayArea === DisplayAreas.Day.id && <>
                 <label htmlFor='date'>Date:</label>
                 <input id='date' type='date' value={format(state.date, 'yyyy-MM-dd')}
                     onChange={e => dispatch({type: Actions.SET_DATE, value: addDays(new Date(e.target.value), 1)})} />
