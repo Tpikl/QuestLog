@@ -13,11 +13,4 @@ namespace QuestLog.Domain
 
         public Guid UserId { get; set; }
     }
-
-    public enum DisplayArea
-    {
-        day,
-        week,
-        note
-    }
 }
