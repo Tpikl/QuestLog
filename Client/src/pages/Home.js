@@ -8,7 +8,9 @@ export const Home = () => {
     const [weekDate, setWeekDate] = useState(new Date());
 
     return (<>
-        <div>
+        <center><h1>-Weekly Spread-</h1></center>
+
+        <div className='weeklyNav'>
             <button onClick={() => setWeekDate(addDays(weekDate, -7))}>{'<<'}</button>
             <button onClick={() => setWeekDate(addDays(weekDate, 7))}>{'>>'}</button>
         </div>

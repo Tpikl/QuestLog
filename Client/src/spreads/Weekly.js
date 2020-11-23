@@ -52,7 +52,6 @@ export const Weekly = ({startDate}) => {
     };
 
     return (<>
-        <center><h1>-Weekly Spread-</h1></center>
         <div className='weekSpread'>
 
             <div className='weekly'>
