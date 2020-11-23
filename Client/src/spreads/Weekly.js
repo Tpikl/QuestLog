@@ -62,6 +62,7 @@ export const Weekly = ({startDate}) => {
                             <EntryList
                                 area={weeklyFormat(item)}
                                 num={0}
+                                day={item}
                                 entries={entriesByDay(i)}
                                 onSelect={selectModal}
                                 onUpdate={() => weeklyInit()}/>
@@ -75,12 +76,14 @@ export const Weekly = ({startDate}) => {
                     <EntryList
                         area={'To Do'}
                         num={1}
+                        day={null}
                         entries={entriesByArea(DisplayAreas.week)}
                         onSelect={selectModal}
                         onUpdate={() => weeklyInit()}/>
                     <EntryList
                         area={'Notes'}
                         num={2}
+                        day={null}
                         entries={entriesByArea(DisplayAreas.note)}
                         onSelect={selectModal}
                         onUpdate={() => weeklyInit()}/>
