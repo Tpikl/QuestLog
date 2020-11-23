@@ -1,8 +1,8 @@
 {
     "files.exclude": {
         "**/bin": true,
-        "**/Client/build": true,
-        "**/Client/node_modules": true,
-        "**/obj": true
+        "**/obj": true,
+        "**/QuestLog.Client/build": true,
+        "**/QuestLog.Client/node_modules": true
     }
 }
