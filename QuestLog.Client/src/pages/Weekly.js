@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { isToday } from 'date-fns';
+import { addDays, isToday } from 'date-fns';
 import { Modal } from '../shared/Modal';
 import { InitialState, DisplayAreas } from '../state/entry';
 import { ByDateRange } from '../api/entry';
@@ -12,14 +12,16 @@ import { StyledEntryList } from '../components/EntryList.styled';
 import './Weekly.scss';
 
 
-export const Weekly = ({startDate}) => {
+export const Weekly = () => {
+    const [weekDate, setWeekDate] = useState(new Date());
+
     // Handle startDate
-    useEffect(() => weeklyInit(), [startDate]);
+    useEffect(() => weeklyInit(), [weekDate]);
 
     // Initialize Weekly data.
     const [weekEntries, setWeekEntries] = useState([]);
     function weeklyInit() {
-        ByDateRange(startOfThisWeek(startDate), endOfThisWeek(startDate))
+        ByDateRange(startOfThisWeek(weekDate), endOfThisWeek(weekDate))
         .then(r => {
             setWeekEntries(r.data.map(e =>
                 ({...e, date: new Date(e.date)})
@@ -52,10 +54,17 @@ export const Weekly = ({startDate}) => {
     };
 
     return (<>
+        <center><h1>-Weekly Spread-</h1></center>
+
+        <div className='weeklyNav'>
+            <button onClick={() => setWeekDate(addDays(weekDate, -7))}>{'<<'}</button>
+            <button onClick={() => setWeekDate(addDays(weekDate, 7))}>{'>>'}</button>
+        </div>
+
         <div className='weekSpread'>
 
             <div className='weekly'>
-                {weekDays(startDate).map((item, i) => {
+                {weekDays(weekDate).map((item, i) => {
                     return (
                         <StyledEntryList key={i} boldTitle={isToday(item)}>
                             <EntryList
@@ -93,8 +102,4 @@ export const Weekly = ({startDate}) => {
                 onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
         </Modal>
     </>);
-};
-
-Weekly.propTypes = {
-    startDate: PropTypes.instanceOf(Date)
 };

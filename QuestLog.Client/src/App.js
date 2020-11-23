@@ -6,18 +6,20 @@ import GlobalStyle from './style/globalStyle';
 import { theme } from './style/theme';
 import { Navbar } from './shared/Navbar';
 import { Home } from './pages/Home';
+import { Weekly } from './pages/Weekly';
 
 import './App.scss';
 
 
 export const App = () => {
-    return (
+    return (    
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Router>
 
                 <Navbar />
                 <Route exact path='/' component={Home} />
+                <Route exact path='/weekly' component={Weekly} />
 
             </Router>
         </ThemeProvider>
