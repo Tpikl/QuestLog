@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { UpdateEntry, DeleteEntry } from '../api/entry';
 import { Reducer } from '../reducers/entry';
 import { Actions } from '../actions/entry';
-import './Entry.scss';
+import { StyledEntry } from './Entry.styled';
 
 export const Entry = ({entry, onSelect, onUpdate}) => {
     const [state, dispatch] = useReducer(Reducer, entry);
@@ -23,25 +23,21 @@ export const Entry = ({entry, onSelect, onUpdate}) => {
             .then(() => onUpdate());
     }
 
-    const completed = () => {
-        return state.completed ? 'completed' : ''
-    };
-
     return (
-        <div className='entry'>
+        <StyledEntry completed={state.completed}>
             <div className='entryBlock'>
                 <div className='header'>
                     <span className='pointer' onClick={() => dispatch({type: Actions.TOGGLE_COMPLETED})}>
-                        <div className={completed()}>{state.title}</div>
+                        <div className={'entryText'}>{state.title}</div>
                     </span>
                     <div className='controls hidden'>
                         <i className='pointer far fa-edit' onClick={() => onSelect(state)}></i>&nbsp;&nbsp;
                         <i className='deleteBtn pointer far fa-window-close' onClick={() => deleteEntry()}></i>
                     </div>
                 </div>
-                <small className={`description hidden ${completed()}`}>{state.description}</small>
+                <small className={`description hidden entryText`}>{state.description}</small>
             </div>
-        </div>
+        </StyledEntry>
     );
 };
 

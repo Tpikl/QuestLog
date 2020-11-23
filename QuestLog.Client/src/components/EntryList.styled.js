@@ -19,5 +19,5 @@ export const StyledEntryList = styled.div
         .title {
             font-weight: bold;
         }`
-    : '' }}
+    : '' }
 `;
