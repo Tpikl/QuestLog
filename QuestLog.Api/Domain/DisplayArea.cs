@@ -2,8 +2,8 @@ namespace QuestLog.Domain
 {
     public enum DisplayArea
     {
-        day,
-        week,
-        note
+        Day,
+        Todo,
+        Note
     }
 }
