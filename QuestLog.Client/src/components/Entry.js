@@ -4,6 +4,7 @@ import { UpdateEntry, DeleteEntry } from '../api/entry';
 import { Reducer } from '../reducers/entry';
 import { Actions } from '../actions/entry';
 import { StyledEntry } from './Entry.styled';
+import CustomButton, { ButtonTypes } from '../controls/CustomButton';
 
 export const Entry = ({entry, onSelect, onUpdate}) => {
     const [state, dispatch] = useReducer(Reducer, entry);
@@ -31,8 +32,8 @@ export const Entry = ({entry, onSelect, onUpdate}) => {
                         <div className={'entryText'}>{state.title}</div>
                     </span>
                     <div className='controls hidden'>
-                        <i className='pointer far fa-edit' onClick={() => onSelect(state)}></i>&nbsp;&nbsp;
-                        <i className='deleteBtn pointer far fa-window-close' onClick={() => deleteEntry()}></i>
+                        <CustomButton buttonType={ButtonTypes.Edit} onClick={() => onSelect(state)}/>&nbsp;
+                        <CustomButton buttonType={ButtonTypes.Delete} onClick={() => deleteEntry()}/>
                     </div>
                 </div>
                 <small className={`description hidden entryText`}>{state.description}</small>

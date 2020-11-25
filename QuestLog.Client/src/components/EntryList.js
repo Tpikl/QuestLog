@@ -1,6 +1,7 @@
 import React from 'react';
 import { Entry } from './Entry';
 import { InitialState } from '../state/entry';
+import CustomButton, { ButtonTypes } from '../controls/CustomButton';
 
 const EntryList = ({area, day, entries, onSelect, onUpdate}) => {
     const onAdd = () => 
@@ -13,7 +14,7 @@ const EntryList = ({area, day, entries, onSelect, onUpdate}) => {
             <div className='titleHeader pointer'>
                 <div className={'title'}>{area.name}:</div>&nbsp;&nbsp;
                 <div className='flexCenter'>
-                    <i className='addBtn pointer far fa-plus-square' onClick={() => onAdd()}></i>
+                    <CustomButton buttonType={ButtonTypes.Add} onClick={() => onAdd()}/>
                 </div>
             </div>
 

@@ -9,18 +9,12 @@ const GlobalStyle = createGlobalStyle
         margin: 0;  // No header is gonna have rogue margins in my projects!
     }
 
-    .addBtn {
-        color: ${({theme}) => theme.primaryGreen};
-    }
-    .deleteBtn {
-        color: ${({theme}) => theme.primaryRed};
-    }
-
     .titleHeader {
         display: flex;
         padding: 5px 1px;
         transition: all 0.5s;
-    }.titleHeader:hover {
+    }
+    .titleHeader:hover {
         background-color: #AAA;
     }
 `;
