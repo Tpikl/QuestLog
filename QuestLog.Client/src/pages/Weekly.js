@@ -7,8 +7,7 @@ import { EntryForm } from '../forms/EntryForm';
 import { endOfThisWeek, startOfThisWeek, weekDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
 import { StyledEntryList } from '../components/EntryList.styled';
-
-import './Weekly.scss';
+import StyledWeekly from './Weekly.styled';
 
 
 const Weekly = () => {
@@ -51,54 +50,56 @@ const Weekly = () => {
         setModalOpen(true);
     };
 
-    return (<>
-        <center><h1>-Weekly Spread-</h1></center>
+    return (
+        <StyledWeekly>
+            <center><h1>-Weekly Spread-</h1></center>
 
-        <div className='weeklyNav'>
-            <button onClick={() => setWeeklyDate(addDays(weeklyDate, -7))}>{'<<'}</button>
-            <button onClick={() => setWeeklyDate(addDays(weeklyDate, 7))}>{'>>'}</button>
-        </div>
-
-        <div className='weekSpread'>
-
-            <div className='weekly'>
-                {weekDays(weeklyDate).map((item, i) => {
-                    return (
-                        <StyledEntryList key={i} boldTitle={isToday(item)}>
-                            <EntryList
-                                area={{...DisplayAreas.day, name: weeklyFormat(item)}}
-                                day={item}
-                                entries={entriesByDay(i)}
-                                onSelect={selectModal}
-                                onUpdate={() => weeklyInit()}/>
-                        </StyledEntryList>
-                    )
-                })}
+            <div className='weeklyNav'>
+                <button onClick={() => setWeeklyDate(addDays(weeklyDate, -7))}>{'<<'}</button>
+                <button onClick={() => setWeeklyDate(addDays(weeklyDate, 7))}>{'>>'}</button>
             </div>
 
-            <div className='side'>
-                <StyledEntryList boldTitle={true}>
-                    <EntryList
-                        area={DisplayAreas.Todo}
-                        day={null}
-                        entries={entriesByArea(DisplayAreas.Todo.id)}
-                        onSelect={selectModal}
-                        onUpdate={() => weeklyInit()}/>
-                    <EntryList
-                        area={DisplayAreas.Note}
-                        day={null}
-                        entries={entriesByArea(DisplayAreas.Note.id)}
-                        onSelect={selectModal}
-                        onUpdate={() => weeklyInit()}/>
-                </StyledEntryList>
-            </div>
+            <div className='weekSpread'>
 
-        </div>
-        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-            <EntryForm
-                entry={selectedEntry}
-                onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
-        </Modal>
-    </>);
+                <div className='weekly'>
+                    {weekDays(weeklyDate).map((item, i) => {
+                        return (
+                            <StyledEntryList key={i} boldTitle={isToday(item)}>
+                                <EntryList
+                                    area={{...DisplayAreas.day, name: weeklyFormat(item)}}
+                                    day={item}
+                                    entries={entriesByDay(i)}
+                                    onSelect={selectModal}
+                                    onUpdate={() => weeklyInit()}/>
+                            </StyledEntryList>
+                        )
+                    })}
+                </div>
+
+                <div className='side'>
+                    <StyledEntryList boldTitle={true}>
+                        <EntryList
+                            area={DisplayAreas.Todo}
+                            day={null}
+                            entries={entriesByArea(DisplayAreas.Todo.id)}
+                            onSelect={selectModal}
+                            onUpdate={() => weeklyInit()}/>
+                        <EntryList
+                            area={DisplayAreas.Note}
+                            day={null}
+                            entries={entriesByArea(DisplayAreas.Note.id)}
+                            onSelect={selectModal}
+                            onUpdate={() => weeklyInit()}/>
+                    </StyledEntryList>
+                </div>
+
+            </div>
+            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+                <EntryForm
+                    entry={selectedEntry}
+                    onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
+            </Modal>
+        </StyledWeekly>
+    );
 };
 export default Weekly;
