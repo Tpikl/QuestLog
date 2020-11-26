@@ -5,8 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/globalStyle';
 import { theme } from './style/theme';
 import { Navbar } from './shared/Navbar';
-import { Home } from './pages/Home';
-import { Weekly } from './pages/Weekly';
+import Home from './pages/Home';
+import Weekly from './pages/Weekly';
 
 export const App = () => {
     return (

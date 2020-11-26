@@ -11,7 +11,7 @@ import { StyledEntryList } from '../components/EntryList.styled';
 import './Weekly.scss';
 
 
-export const Weekly = () => {
+const Weekly = () => {
     // Handle weeklyDate
     const [weeklyDate, setWeeklyDate] = useState(new Date());
     useEffect(() => weeklyInit(), [weeklyDate]);
@@ -101,3 +101,4 @@ export const Weekly = () => {
         </Modal>
     </>);
 };
+export default Weekly;
