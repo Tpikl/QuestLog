@@ -6,6 +6,7 @@ import GlobalStyle from './style/globalStyle';
 import { theme } from './style/theme';
 import { Navbar } from './shared/Navbar';
 import Home from './pages/Home';
+import Monthly from './pages/Monthly';
 import Weekly from './pages/Weekly';
 
 export const App = () => {
@@ -17,6 +18,7 @@ export const App = () => {
                 <Navbar />
                 <div className='pillar'>
                     <Route exact path='/' component={Home} />
+                    <Route exact path='/monthly' component={Monthly} />
                     <Route exact path='/weekly' component={Weekly} />
                 </div>
 

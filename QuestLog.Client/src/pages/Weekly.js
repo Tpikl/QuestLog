@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addDays, isToday } from 'date-fns';
+import { addDays, format, isToday } from 'date-fns';
 import { Modal } from '../shared/Modal';
 import { InitialState, DisplayAreas } from '../state/entry';
 import { ByDateRange } from '../api/entry';
@@ -53,7 +53,10 @@ const Weekly = () => {
 
     return (
         <StyledWeekly>
-            <center><h1>-Weekly Spread-</h1></center>
+            <center>
+                <h1>-Weekly Spread-</h1>
+                <h2>{format(startOfThisWeek(weeklyDate), 'MMM do')} - {format(endOfThisWeek(weeklyDate), 'do, yyyy')}</h2>
+            </center>
 
             <SpreadNav onClickLeft={() => setWeeklyDate(addDays(weeklyDate, -7))}
                         onClickRight={() => setWeeklyDate(addDays(weeklyDate, 7))} />
