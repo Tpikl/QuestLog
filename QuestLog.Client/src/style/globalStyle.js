@@ -9,15 +9,6 @@ const GlobalStyle = createGlobalStyle
         margin: 0;  // No header is gonna have rogue margins in my projects!
     }
 
-    .titleHeader {
-        display: flex;
-        padding: 5px 1px;
-        transition: all 0.5s;
-    }
-    .titleHeader:hover {
-        background-color: #AAA;
-    }
-
     // Flex things
     .flexCenter {
         display: flex;
