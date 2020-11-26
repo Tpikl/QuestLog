@@ -2,20 +2,6 @@ import styled from 'styled-components';
 
 const StyledWeekly = styled.div
 `
-    .weeklyNav {
-        display: flex;
-        justify-content: space-around;
-    }
-    .weeklyNav > button {
-        height: 30px;
-        width: 120px;
-        color: white;
-        background-color: darkolivegreen;
-        border: 2px black solid;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-
     .weekSpread
     {
         display: flex;

@@ -8,6 +8,7 @@ import { endOfThisWeek, startOfThisWeek, weekDays, weeklyFormat } from '../util/
 import EntryList from '../components/EntryList';
 import { StyledEntryList } from '../components/EntryList.styled';
 import StyledWeekly from './Weekly.styled';
+import SpreadNav from '../components/SpreadNav';
 
 
 const Weekly = () => {
@@ -54,10 +55,8 @@ const Weekly = () => {
         <StyledWeekly>
             <center><h1>-Weekly Spread-</h1></center>
 
-            <div className='weeklyNav'>
-                <button onClick={() => setWeeklyDate(addDays(weeklyDate, -7))}>{'<<'}</button>
-                <button onClick={() => setWeeklyDate(addDays(weeklyDate, 7))}>{'>>'}</button>
-            </div>
+            <SpreadNav onClickLeft={() => setWeeklyDate(addDays(weeklyDate, -7))}
+                        onClickRight={() => setWeeklyDate(addDays(weeklyDate, 7))} />
 
             <div className='weekSpread'>
 
