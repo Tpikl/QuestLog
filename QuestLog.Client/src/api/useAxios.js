@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetch = ({ api, method, url, data = null, config = null }) => {
+const useAxios = ({ api, method, url, data = null, config = null }) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -25,4 +25,4 @@ const useFetch = ({ api, method, url, data = null, config = null }) => {
   return { response, error, isLoading };
 };
 
-export default useFetch;
+export default useAxios;

@@ -9,7 +9,7 @@ import EntryList from '../components/EntryList';
 import { StyledEntryList } from '../components/EntryList.styled';
 import StyledWeekly from './Weekly.styled';
 import SpreadNav from '../components/SpreadNav';
-import useFetch from '../api/useFetch';
+import useAxios from '../api/useAxios';
 
 
 const Weekly = () => {
@@ -17,7 +17,7 @@ const Weekly = () => {
     const [weeklyDate, setWeeklyDate] = useState(startOfWeek(new Date()));
 
     const [timeStamp, setTimeStamp] = useState(new Date());
-    const { response } = useFetch({
+    const { response } = useAxios({
         api: entryApi,
         method: 'get',
         url: `/ByDateRange/?start=${format(weeklyDate, 'yyyy-MM-dd')}&end=${format(endOfWeek(weeklyDate), 'yyyy-MM-dd')}`,

@@ -8,12 +8,12 @@ import EntryList from '../components/EntryList';
 import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
 import { StyledEntryList } from '../components/EntryList.styled';
-import useFetch from '../api/useFetch';
+import useAxios from '../api/useAxios';
 
 const Monthly = () => {
     const [monthlyDate, setMonthlyDate] = useState(startOfMonth(new Date()));
 
-    const { response } = useFetch({
+    const { response } = useAxios({
         api: entryApi,
         method: "get",
         url: `/ByDateRange/?start=${format(monthlyDate, 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
