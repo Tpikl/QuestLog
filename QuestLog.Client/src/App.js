@@ -34,7 +34,7 @@ export const App = () => {
                         component={Home} />
                     <Route
                         exact path='/monthly'
-                        component={Monthly} />
+                        render={() => <Monthly date={date} selectModal={selectModal} />} />
                     <Route
                         exact path='/weekly'
                         render={() => <Weekly date={date} selectModal={selectModal} />} />
@@ -45,8 +45,8 @@ export const App = () => {
                     onClose={() => setModalOpen(false)}>
                     <EntryForm
                         entry={selectedEntry}
-                        onUpdate={() => {
-                            setDate(new Date());
+                        onUpdate={d => {
+                            setDate(d);
                             setModalOpen(false);
                         }} />
                 </Modal>

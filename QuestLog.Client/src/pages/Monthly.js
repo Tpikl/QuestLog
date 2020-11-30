@@ -10,14 +10,15 @@ import { entryApi } from '../api/entry';
 import { StyledEntryList } from '../components/EntryList.styled';
 import useAxios from '../api/useAxios';
 
-const Monthly = () => {
-    const [monthlyDate, setMonthlyDate] = useState(startOfMonth(new Date()));
+const Monthly = ({date, selectModal}) => {
+    const [monthlyDate, setMonthlyDate] = useState(date);
+    useEffect(() => setMonthlyDate(date), [date]);
 
     const { response } = useAxios({
         api: entryApi,
         method: "get",
-        url: `/ByDateRange/?start=${format(monthlyDate, 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
-        config: JSON.stringify({ requireAuthentication: true })
+        url: `/ByDateRange/?start=${format(startOfMonth(monthlyDate), 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
+        config: JSON.stringify({ timeStamp: monthlyDate })
       });
       const [data, setData] = useState([]);
 
@@ -48,15 +49,15 @@ const Monthly = () => {
                         onClickRight={() => setMonthlyDate(addMonths(monthlyDate, 1))} />
 
             <div className='MonthList'>
-                {data.length > 0 && monthDays(monthlyDate).map((item, i) => {
+                {monthDays(monthlyDate).map((item, i) => {
                     return (
                         <StyledEntryList key={i} boldTitle={false}>
                         <EntryList
                             area={{...DisplayAreas.day, name: weeklyFormat(item)}}
                             day={item}
                             entries={entriesByDay(i+1)}
-                            onSelect={() => {}}
-                            onUpdate={() => {}}/>
+                            onSelect={selectModal}
+                            onUpdate={() => setMonthlyDate(monthlyDate)}/>
                     </StyledEntryList>)
                 })}
             </div>

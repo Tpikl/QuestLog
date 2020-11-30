@@ -5,7 +5,7 @@ import './Modal.scss'
 const MODAL_ID = 'THE_MODAL';
 
 export const Modal = ({children, open, onClose}) => {
-    window.onclick = function(e) {
+    window.onmousedown = function(e) {
         if (e.target === getModal()) onClose();
         if (e.target.parentElement === getModal()) onClose();  // Because of .flexCenter
     };

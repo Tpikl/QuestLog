@@ -13,12 +13,12 @@ import useAxios from '../api/useAxios';
 const Weekly = ({date, selectModal}) => {
     // Handle weeklyDate
     const [weeklyDate, setWeeklyDate] = useState(date);
-    useEffect(() => setWeeklyDate(date), [date])
+    useEffect(() => setWeeklyDate(date), [date]);
 
     const { response } = useAxios({
         api: entryApi,
         method: 'get',
-        url: `/ByDateRange/?start=${format(startOfWeek(date), 'yyyy-MM-dd')}&end=${format(endOfWeek(date), 'yyyy-MM-dd')}`,
+        url: `/ByDateRange/?start=${format(startOfWeek(weeklyDate), 'yyyy-MM-dd')}&end=${format(endOfWeek(weeklyDate), 'yyyy-MM-dd')}`,
         config: JSON.stringify({ timeStamp: weeklyDate})
     });
     const [weekEntries, setWeekEntries] = useState([]);
@@ -67,7 +67,7 @@ const Weekly = ({date, selectModal}) => {
                                     day={item}
                                     entries={entriesByDay(i)}
                                     onSelect={selectModal}
-                                    onUpdate={() => setWeeklyDate(new Date())}/>
+                                    onUpdate={() => setWeeklyDate(weeklyDate)}/>
                             </StyledEntryList>
                         )
                     })}

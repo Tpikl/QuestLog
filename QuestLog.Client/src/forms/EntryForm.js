@@ -18,8 +18,8 @@ export const EntryForm = ({entry, onUpdate}) => {
     function submitForm(e) {
         e.preventDefault();
         (state.id !== null)
-            ? UpdateEntry(state).then(() => onUpdate())
-            : AddEntry(state).then(() => onUpdate())
+            ? UpdateEntry(state).then(() => onUpdate(state.date))
+            : AddEntry(state).then(() => onUpdate(state.date))
     }
 
     return (
