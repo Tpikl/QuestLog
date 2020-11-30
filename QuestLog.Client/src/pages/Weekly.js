@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { addDays, format, isToday } from 'date-fns';
+import { addDays, endOfWeek, format, isToday, startOfWeek } from 'date-fns';
 import { Modal } from '../shared/Modal';
 import { InitialState, DisplayAreas } from '../state/entry';
-import { ByDateRange } from '../api/entry';
+import { entryApi } from '../api/entry';
 import { EntryForm } from '../forms/EntryForm';
-import { endOfThisWeek, startOfThisWeek, weekDays, weeklyFormat } from '../util/weekDays';
+import { weekDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
 import { StyledEntryList } from '../components/EntryList.styled';
 import StyledWeekly from './Weekly.styled';
 import SpreadNav from '../components/SpreadNav';
+import useFetch from '../api/useFetch';
 
 
 const Weekly = () => {
     // Handle weeklyDate
-    const [weeklyDate, setWeeklyDate] = useState(new Date());
-    useEffect(() => weeklyInit(), [weeklyDate]);
+    const [weeklyDate, setWeeklyDate] = useState(startOfWeek(new Date()));
 
-    // Initialize Weekly data.
+    const [timeStamp, setTimeStamp] = useState(new Date());
+    const { response } = useFetch({
+        api: entryApi,
+        method: 'get',
+        url: `/ByDateRange/?start=${format(weeklyDate, 'yyyy-MM-dd')}&end=${format(endOfWeek(weeklyDate), 'yyyy-MM-dd')}`,
+        config: JSON.stringify({ timeStamp: timeStamp})
+    });
     const [weekEntries, setWeekEntries] = useState([]);
-    function weeklyInit() {
-        ByDateRange(startOfThisWeek(weeklyDate), endOfThisWeek(weeklyDate))
-        .then(r => {
-            setWeekEntries(r.data.map(e =>
-                ({...e, date: new Date(e.date)})
-            ));
-        });
-    }
+
+    useEffect(() => {
+        if (response !== null) {
+            setWeekEntries(response.map(e =>
+                ({...e, date: new Date(e.date)})));
+        }
+    }, [response]);
 
     const entriesByDay = (day) => {
         let e = [];
@@ -55,7 +60,7 @@ const Weekly = () => {
         <StyledWeekly>
             <center>
                 <h1>-Weekly Spread-</h1>
-                <h2>{format(startOfThisWeek(weeklyDate), 'MMM do')} - {format(endOfThisWeek(weeklyDate), 'do, yyyy')}</h2>
+                <h2>{format(startOfWeek(weeklyDate), 'MMM do')} - {format(endOfWeek(weeklyDate), 'do, yyyy')}</h2>
             </center>
 
             <SpreadNav onClickLeft={() => setWeeklyDate(addDays(weeklyDate, -7))}
@@ -72,7 +77,7 @@ const Weekly = () => {
                                     day={item}
                                     entries={entriesByDay(i)}
                                     onSelect={selectModal}
-                                    onUpdate={() => weeklyInit()}/>
+                                    onUpdate={() => setTimeStamp(new Date())}/>
                             </StyledEntryList>
                         )
                     })}
@@ -85,13 +90,13 @@ const Weekly = () => {
                             day={null}
                             entries={entriesByArea(DisplayAreas.Todo.id)}
                             onSelect={selectModal}
-                            onUpdate={() => weeklyInit()}/>
+                            onUpdate={() => setTimeStamp(new Date())}/>
                         <EntryList
                             area={DisplayAreas.Note}
                             day={null}
                             entries={entriesByArea(DisplayAreas.Note.id)}
                             onSelect={selectModal}
-                            onUpdate={() => weeklyInit()}/>
+                            onUpdate={() => setTimeStamp(new Date())}/>
                     </StyledEntryList>
                 </div>
 
@@ -99,7 +104,7 @@ const Weekly = () => {
             <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
                 <EntryForm
                     entry={selectedEntry}
-                    onUpdate={() => {weeklyInit(); setModalOpen(false);}} />
+                    onUpdate={() => {setTimeStamp(new Date()); setModalOpen(false);}} />
             </Modal>
         </StyledWeekly>
     );

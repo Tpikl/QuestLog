@@ -20,8 +20,5 @@ export const monthDays = (date) => {
     return days;
 }
 
-export const startOfThisWeek = date => startOfWeek(date);
-export const endOfThisWeek = date => addDays(startOfWeek(date), 6);
-
 export const dateFormat = date => format(date, DATE_FORMAT)
 export const weeklyFormat = date => `[${format(date, 'do')}] - ${format(date, 'eeee')}`;
