@@ -6,27 +6,31 @@ import StyledMonthly from './Monthly.styled';
 import { monthDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
 import { DisplayAreas } from '../state/entry';
-import { ByDateRange } from '../api/entry';
+import { entryApi } from '../api/entry';
 import { StyledEntryList } from '../components/EntryList.styled';
+import useFetch from '../api/useFetch';
 
 const Monthly = () => {
     const [monthlyDate, setMonthlyDate] = useState(startOfMonth(new Date()));
-    useEffect(() => monthlyInit(), [monthlyDate]);
 
-    // Initialize Monthly data.
-    const [monthEntries, setMonthEntries] = useState([]);
-    function monthlyInit() {
-        ByDateRange(monthlyDate, endOfMonth(monthlyDate))
-        .then(r => {
-            setMonthEntries(r.data.map(e =>
-                ({...e, date: new Date(e.date)})
-            ));
-        });
-    }
+    const { response } = useFetch({
+        api: entryApi,
+        method: "get",
+        url: `/ByDateRange/?start=${format(monthlyDate, 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
+        config: JSON.stringify({ requireAuthentication: true })
+      });
+      const [data, setData] = useState([]);
+
+      useEffect(() => {
+        if (response !== null) {
+            setData(response.map(e =>
+                ({...e, date: new Date(e.date)})));
+        }
+      }, [response]);
 
     const entriesByDay = (day) => {
         let e = [];
-        monthEntries.forEach(item => {
+        data.forEach(item => {
             if (item.date.getDate() === day && item.displayArea === DisplayAreas.Day.id)
                 e.push(item);
         });
@@ -44,7 +48,7 @@ const Monthly = () => {
                         onClickRight={() => setMonthlyDate(addMonths(monthlyDate, 1))} />
 
             <div className='MonthList'>
-                {monthDays(monthlyDate).map((item, i) => {
+                {data.length > 0 && monthDays(monthlyDate).map((item, i) => {
                     return (
                         <StyledEntryList key={i} boldTitle={false}>
                         <EntryList

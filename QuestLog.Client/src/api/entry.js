@@ -27,3 +27,7 @@ export async function DeleteEntry(id) {
 export async function ByDateRange(start, end) {
     return axios(`${ENTRY_URL}/ByDateRange/?start=${format(start, DATE_FORMAT)}&end=${format(end, DATE_FORMAT)}`);
 }
+
+export const entryApi = axios.create({
+    baseURL: ENTRY_URL
+  });
