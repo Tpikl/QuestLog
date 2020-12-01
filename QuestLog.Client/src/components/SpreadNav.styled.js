@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-const StyledSpreadNav = styled.div
-`
-        display: flex;
-        justify-content: space-around;
+const StyledSpreadNav = styled.div`
+    display: flex;
+    justify-content: space-around;
 
     button {
         height: 30px;

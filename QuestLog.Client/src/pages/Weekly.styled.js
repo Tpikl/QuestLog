@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-const StyledWeekly = styled.div
-`
+const StyledWeekly = styled.div`
     .weekSpread
     {
         display: flex;

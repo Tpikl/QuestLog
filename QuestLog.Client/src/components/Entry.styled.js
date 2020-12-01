@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledEntry = styled.div
-`
+export const StyledEntry = styled.div`
     margin: 5px;
     display: inline-block;
 

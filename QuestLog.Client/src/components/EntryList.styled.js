@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledEntryList = styled.div
-`
+export const StyledEntryList = styled.div`
     .entryList {
         margin: 1px;
         padding-bottom: 15px;
