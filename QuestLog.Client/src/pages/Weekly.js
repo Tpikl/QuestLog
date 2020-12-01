@@ -10,15 +10,14 @@ import SpreadNav from '../components/SpreadNav';
 import useAxios from '../api/useAxios';
 
 
-const Weekly = ({date, selectModal}) => {
-    // Handle weeklyDate
+const Weekly = ({date, setDate, selectModal}) => {
     const [weeklyDate, setWeeklyDate] = useState(date);
-    useEffect(() => setWeeklyDate(date), [date]);
+    useEffect(() => startOfWeek(setWeeklyDate(date)), [date]);
 
     const { response } = useAxios({
         api: entryApi,
         method: 'get',
-        url: `/ByDateRange/?start=${format(startOfWeek(weeklyDate), 'yyyy-MM-dd')}&end=${format(endOfWeek(weeklyDate), 'yyyy-MM-dd')}`,
+        url: `/ByDateRange/?start=${format(weeklyDate, 'yyyy-MM-dd')}&end=${format(endOfWeek(weeklyDate), 'yyyy-MM-dd')}`,
         config: JSON.stringify({ timeStamp: weeklyDate})
     });
     const [weekEntries, setWeekEntries] = useState([]);
@@ -50,16 +49,16 @@ const Weekly = ({date, selectModal}) => {
         <StyledWeekly>
             <center>
                 <h1>-Weekly Spread-</h1>
-                <h2>{format(startOfWeek(weeklyDate), 'MMM do')} - {format(endOfWeek(weeklyDate), 'do, yyyy')}</h2>
+                <h2>{format(weeklyDate, 'MMM do')} - {format(endOfWeek(weeklyDate), 'do, yyyy')}</h2>
             </center>
 
-            <SpreadNav onClickLeft={() => setWeeklyDate(addDays(weeklyDate, -7))}
-                        onClickRight={() => setWeeklyDate(addDays(weeklyDate, 7))} />
+            <SpreadNav onClickLeft={() => setDate(addDays(weeklyDate, -7))}
+                        onClickRight={() => setDate(addDays(weeklyDate, 7))} />
 
             <div className='weekSpread'>
 
                 <div className='weekly'>
-                    {weekDays(weeklyDate).map((item, i) => {
+                    {weekDays(date).map((item, i) => {
                         return (
                             <StyledEntryList key={i} boldTitle={isToday(item)}>
                                 <EntryList
@@ -67,7 +66,7 @@ const Weekly = ({date, selectModal}) => {
                                     day={item}
                                     entries={entriesByDay(i)}
                                     onSelect={selectModal}
-                                    onUpdate={() => setWeeklyDate(weeklyDate)}/>
+                                    onUpdate={() => setDate(weeklyDate)}/>
                             </StyledEntryList>
                         )
                     })}
@@ -80,13 +79,13 @@ const Weekly = ({date, selectModal}) => {
                             day={null}
                             entries={entriesByArea(DisplayAreas.Todo.id)}
                             onSelect={selectModal}
-                            onUpdate={() => setWeeklyDate(new Date())}/>
+                            onUpdate={() => setDate(weeklyDate)}/>
                         <EntryList
                             area={DisplayAreas.Note}
                             day={null}
                             entries={entriesByArea(DisplayAreas.Note.id)}
                             onSelect={selectModal}
-                            onUpdate={() => setWeeklyDate(new Date())}/>
+                            onUpdate={() => setDate(weeklyDate)}/>
                     </StyledEntryList>
                 </div>
 

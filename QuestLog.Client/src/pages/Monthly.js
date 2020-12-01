@@ -10,14 +10,14 @@ import { entryApi } from '../api/entry';
 import { StyledEntryList } from '../components/EntryList.styled';
 import useAxios from '../api/useAxios';
 
-const Monthly = ({date, selectModal}) => {
+const Monthly = ({date, setDate, selectModal}) => {
     const [monthlyDate, setMonthlyDate] = useState(date);
-    useEffect(() => setMonthlyDate(date), [date]);
+    useEffect(() => startOfMonth(setMonthlyDate(date)), [date]);
 
     const { response } = useAxios({
         api: entryApi,
         method: "get",
-        url: `/ByDateRange/?start=${format(startOfMonth(monthlyDate), 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
+        url: `/ByDateRange/?start=${format(monthlyDate, 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
         config: JSON.stringify({ timeStamp: monthlyDate })
       });
       const [data, setData] = useState([]);
@@ -45,8 +45,8 @@ const Monthly = ({date, selectModal}) => {
                 <h2>{format(monthlyDate, 'MMMM, yyyy')}</h2>
             </center>
 
-            <SpreadNav onClickLeft={() => setMonthlyDate(addMonths(monthlyDate, -1))}
-                        onClickRight={() => setMonthlyDate(addMonths(monthlyDate, 1))} />
+            <SpreadNav onClickLeft={() => setDate(addMonths(monthlyDate, -1))}
+                        onClickRight={() => setDate(addMonths(monthlyDate, 1))} />
 
             <div className='monthList'>
                 {monthDays(monthlyDate).map((item, i) => {
@@ -57,7 +57,7 @@ const Monthly = ({date, selectModal}) => {
                             day={item}
                             entries={entriesByDay(i+1)}
                             onSelect={selectModal}
-                            onUpdate={() => setMonthlyDate(monthlyDate)}/>
+                            onUpdate={() => setDate(monthlyDate)}/>
                     </StyledEntryList>)
                 })}
             </div>

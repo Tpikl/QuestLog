@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { monthsByCount, monthWeeks } from '../util/weekDays';
 import StyledHome from './Home.styled';
 
-const Home = ({date, setDate}) => {
+const Home = ({setDate}) => {
     return (
         <StyledHome>
             <h1>-Home page-</h1>
@@ -12,7 +12,7 @@ const Home = ({date, setDate}) => {
             <div>
                 <h3>Index:</h3>
 
-                {monthsByCount(date, 3).map((month, i) => { return (
+                {monthsByCount(new Date(), 3).map((month, i) => { return (
                     <div key={i} className='monthGroup'>
                         <Link className='monthLink' to='/Monthly' onClick={() => setDate(month)}>{format(month, 'MMMM - yyyy')}</Link>
 

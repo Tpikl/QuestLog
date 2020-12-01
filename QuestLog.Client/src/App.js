@@ -27,17 +27,17 @@ export const App = () => {
             <GlobalStyle />
             <Router>
 
-                <Navbar />
+                <Navbar date={date} setDate={setDate} />
                 <div className='pillar'>
                     <Route
                         exact path='/'
-                        render={() => <Home date={date} setDate={setDate} />} />
+                        render={() => <Home setDate={setDate} />} />
                     <Route
                         exact path='/monthly'
-                        render={() => <Monthly date={date} selectModal={selectModal} />} />
+                        render={() => <Monthly date={date} setDate={setDate} selectModal={selectModal} />} />
                     <Route
                         exact path='/weekly'
-                        render={() => <Weekly date={date} selectModal={selectModal} />} />
+                        render={() => <Weekly date={date} setDate={setDate} selectModal={selectModal} />} />
                 </div>
 
                 <Modal
