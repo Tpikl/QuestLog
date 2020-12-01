@@ -1,4 +1,4 @@
-import { format, addDays, startOfWeek, getDaysInMonth, startOfMonth } from 'date-fns';
+import { format, addDays, startOfWeek, getDaysInMonth, startOfMonth, addMonths, addWeeks, getWeeksInMonth } from 'date-fns';
 
 const DATE_FORMAT = 'yyyy-MM-dd';
 
@@ -22,3 +22,29 @@ export const monthDays = (date) => {
 
 export const dateFormat = date => format(date, DATE_FORMAT)
 export const weeklyFormat = date => `[${format(date, 'do')}] - ${format(date, 'eeee')}`;
+
+
+export const monthsByCount = (date, count) => {
+    let months = [];
+    date = startOfMonth(date);
+    for (let i=0; i < count; i++)
+        months.push(addMonths(date, i));
+    return months;
+}
+
+export const monthWeeks = date => {
+    let weeks = [];
+    let month = date.getMonth();
+    let weekCount = getWeeksInMonth(date);
+    date = startOfWeek(startOfMonth(date));
+    for (let i=0; i<weekCount;i++)
+    {
+        let thisWeek = addWeeks(date, i);
+        if (i === 0 || i === weekCount-1)
+            // Wednesday decides which month the first/last weeks belong to.
+            if (month !== addDays(thisWeek, 3).getMonth())
+                continue;
+        weeks.push(thisWeek);
+    }
+    return weeks;
+}
