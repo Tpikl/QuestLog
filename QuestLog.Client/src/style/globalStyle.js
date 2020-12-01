@@ -28,8 +28,13 @@ const GlobalStyle = createGlobalStyle`
     }
     .fancyBtn:hover {
         color:#FFF;
-        background-color:darkgreen;
-        border: 1px solid darkgreen
+        background-color: darkolivegreen;
+        border: 1px solid darkolivegreen;
+    }
+    .activeLink {
+        color:#FFF;
+        background-color: gray;
+        border: 1px solid gray;
     }
 
     // Other

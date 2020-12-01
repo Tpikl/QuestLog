@@ -48,7 +48,7 @@ const Monthly = ({date, selectModal}) => {
             <SpreadNav onClickLeft={() => setMonthlyDate(addMonths(monthlyDate, -1))}
                         onClickRight={() => setMonthlyDate(addMonths(monthlyDate, 1))} />
 
-            <div className='MonthList'>
+            <div className='monthList'>
                 {monthDays(monthlyDate).map((item, i) => {
                     return (
                         <StyledEntryList key={i} boldTitle={false}>

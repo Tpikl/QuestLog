@@ -1,16 +1,12 @@
-import { format } from 'date-fns';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import './Navbar.scss';
 
-export const Navbar = ({date}) => {
-    return (<div>
-        <small>{format(date, 'yyyy-MM-dd HH:mm:ss.SSS')}</small>
-        <nav>
-            <a className='fancyBtn' href='/'>Home</a>
-            <a className='fancyBtn' href='/Monthly'>Monthly</a>
-            <a className='fancyBtn' href='/Weekly'>Weekly</a>
-        </nav>
-    </div>
-    );
+export const Navbar = () => {
+    return (<nav>
+        <NavLink className='fancyBtn' activeClassName='activeLink' exact to='/'>Home</NavLink>
+        <NavLink className='fancyBtn' activeClassName='activeLink' exact to='/Monthly'>Monthly</NavLink>
+        <NavLink className='fancyBtn' activeClassName='activeLink' exact to='/Weekly'>Weekly</NavLink>
+    </nav>);
 };

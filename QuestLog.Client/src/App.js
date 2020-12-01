@@ -27,7 +27,7 @@ export const App = () => {
             <GlobalStyle />
             <Router>
 
-                <Navbar date={date} />
+                <Navbar />
                 <div className='pillar'>
                     <Route
                         exact path='/'
