@@ -1,32 +1,28 @@
 import { endOfWeek, format, startOfWeek } from 'date-fns';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { monthsByCount, monthWeeks } from '../util/weekDays';
+import StyledHome from './Home.styled';
 
 const Home = ({date, setDate}) => {
-    const nav = (d, loc) => {
-        setDate(d);
-        window.location = loc;
-    }
-
-    return (<>
-        <center>
+    return (
+        <StyledHome>
             <h1>-Home page-</h1>
 
             <div>
                 <h3>Index:</h3>
 
-                {monthsByCount(date, 3).map((item, i) => {
-                    return (<div key={i}>
-                        <div onClick={() => nav(item, '/Monthly')}>{format(item, 'MMMM - yy')}</div>
-                        {monthWeeks(item).map((it, ii) => {
-                            return (
-                                <div key={ii} onClick={() => nav(it, '/Weekly')}>{format(startOfWeek(it), 'MMM do')} - {format(endOfWeek(it), 'do, yyyy')}</div>
-                            )
-                        })}
-                    </div>)
-                })}
+                {monthsByCount(date, 3).map((month, i) => { return (
+                    <div key={i} className='monthGroup'>
+                        <Link className='monthLink' to='/Monthly' onClick={() => setDate(month)}>{format(month, 'MMMM - yyyy')}</Link>
+
+                        {monthWeeks(month).map((week, ii) => { return (
+                            <Link key={ii} to='/Weekly' onClick={() => setDate(week)}>{format(startOfWeek(week), 'do')} - {format(endOfWeek(week), 'do')}</Link>
+                        )})}
+                    </div>
+                )})}
             </div>
-        </center>
-    </>);
+        </StyledHome>
+    );
 };
 export default Home;
