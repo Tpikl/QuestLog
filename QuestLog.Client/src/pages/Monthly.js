@@ -7,7 +7,7 @@ import { monthDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
 import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
-import { StyledEntryList } from '../components/EntryList.styled';
+import StyledEntryList from '../components/EntryList.styled';
 import useAxios from '../api/useAxios';
 
 const Monthly = ({date, setDate, selectModal}) => {

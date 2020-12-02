@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledEntryList = styled.div`
+const StyledEntryList = styled.div`
     .entryList {
         margin: 1px;
-        padding-bottom: 15px;
+        padding-bottom: 5px;
     }
     .entryList:hover {
         margin: 0;
@@ -31,3 +31,4 @@ export const StyledEntryList = styled.div`
         }`
     : '' }
 `;
+export default StyledEntryList;

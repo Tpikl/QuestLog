@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { UpdateEntry, DeleteEntry } from '../api/entry';
 import { Reducer } from '../reducers/entry';
 import { Actions } from '../actions/entry';
-import { StyledEntry } from './Entry.styled';
+import StyledEntry from './Entry.styled';
 import CustomButton, { ButtonTypes } from '../controls/CustomButton';
 
 export const Entry = ({entry, onSelect, onUpdate}) => {

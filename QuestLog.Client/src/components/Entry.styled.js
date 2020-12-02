@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledEntry = styled.div`
+const StyledEntry = styled.div`
     margin: 5px;
     display: inline-block;
 
@@ -46,3 +46,4 @@ export const StyledEntry = styled.div`
         }`
     : ''}
 `;
+export default StyledEntry;

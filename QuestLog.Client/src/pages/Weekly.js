@@ -4,7 +4,7 @@ import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
 import { weekDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
-import { StyledEntryList } from '../components/EntryList.styled';
+import StyledEntryList from '../components/EntryList.styled';
 import StyledWeekly from './Weekly.styled';
 import SpreadNav from '../components/SpreadNav';
 import useAxios from '../api/useAxios';
