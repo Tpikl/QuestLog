@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { addDays, endOfWeek, format, isToday, startOfWeek } from 'date-fns';
 import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
-import { weekDays, weeklyFormat } from '../util/weekDays';
+import { weekDays, weeklyFormat } from '../util';
 import EntryList from '../components/EntryList';
 import StyledEntryList from '../components/EntryList.styled';
 import StyledWeekly from './Weekly.styled';

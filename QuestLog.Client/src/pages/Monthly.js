@@ -3,12 +3,12 @@ import { addMonths, endOfMonth, format, startOfMonth } from 'date-fns';
 
 import SpreadNav from '../components/SpreadNav';
 import StyledMonthly from './Monthly.styled';
-import { monthDays, weeklyFormat } from '../util/weekDays';
 import EntryList from '../components/EntryList';
 import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
 import StyledEntryList from '../components/EntryList.styled';
 import useAxios from '../api/useAxios';
+import { monthDays, weeklyFormat } from '../util';
 
 const Monthly = ({date, setDate, selectModal}) => {
     const [monthlyDate, setMonthlyDate] = useState(date);

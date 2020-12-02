@@ -1,7 +1,7 @@
 import { endOfWeek, format, startOfWeek } from 'date-fns';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { monthsByCount, monthWeeks } from '../util/weekDays';
+import { monthsByCount, monthWeeks } from '../util';
 import StyledHome from './Home.styled';
 
 const Home = ({setDate}) => {

@@ -2,7 +2,6 @@ import React from 'react';
 import { Entry } from './Entry';
 import { InitialState } from '../state/entry';
 import CustomButton, { ButtonTypes } from '../controls/CustomButton';
-import StyledEntryList from './EntryList.styled';
 
 const EntryList = ({area, day, entries, onSelect, onUpdate}) => {
     const onAdd = () =>

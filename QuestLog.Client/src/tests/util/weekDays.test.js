@@ -1,5 +1,6 @@
 import { endOfWeek, startOfWeek } from 'date-fns';
-import { weekDays, dateFormat } from '../../util/weekDays';
+import { dateFormat } from '../../util/dateFormats';
+import { weekDays } from '../../util/weekDays';
 
 const now = new Date();
 const nowFormatted = dateFormat(now);

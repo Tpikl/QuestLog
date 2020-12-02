@@ -1,6 +1,4 @@
-import { format, addDays, startOfWeek, getDaysInMonth, startOfMonth, addMonths, addWeeks, getWeeksInMonth } from 'date-fns';
-
-const DATE_FORMAT = 'yyyy-MM-dd';
+import { addDays, startOfWeek, getDaysInMonth, startOfMonth, addMonths, addWeeks, getWeeksInMonth } from 'date-fns';
 
 export const weekDays = (date) => {
     let days = []
@@ -19,9 +17,6 @@ export const monthDays = (date) => {
     }
     return days;
 }
-
-export const dateFormat = date => format(date, DATE_FORMAT)
-export const weeklyFormat = date => `[${format(date, 'do')}] - ${format(date, 'eeee')}`;
 
 
 export const monthsByCount = (date, count) => {
