@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addMonths, endOfMonth, format, startOfMonth } from 'date-fns';
+import { addMonths, endOfMonth, startOfMonth } from 'date-fns';
 
 import SpreadNav from '../components/SpreadNav';
 import StyledMonthly from './Monthly.styled';
@@ -8,7 +8,7 @@ import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
 import StyledEntryList from '../components/EntryList.styled';
 import useAxios from '../api/useAxios';
-import { monthDays, weeklyFormat } from '../util';
+import { baseFormat, monthDays, monthlyFormat, weeklyFormat } from '../util';
 
 const Monthly = ({date, setDate, selectModal}) => {
     const [monthlyDate, setMonthlyDate] = useState(date);
@@ -17,7 +17,7 @@ const Monthly = ({date, setDate, selectModal}) => {
     const { response } = useAxios({
         api: entryApi,
         method: "get",
-        url: `/ByDateRange/?start=${format(monthlyDate, 'yyyy-MM-dd')}&end=${format(endOfMonth(monthlyDate), 'yyyy-MM-dd')}`,
+        url: `/ByDateRange/?start=${baseFormat(monthlyDate)}&end=${baseFormat(endOfMonth(monthlyDate))}`,
         config: JSON.stringify({ timeStamp: monthlyDate })
       });
       const [data, setData] = useState([]);
@@ -42,7 +42,7 @@ const Monthly = ({date, setDate, selectModal}) => {
         <StyledMonthly>
             <center>
                 <h1>-Monthly Spread-</h1>
-                <h2>{format(monthlyDate, 'MMMM, yyyy')}</h2>
+                <h2>{monthlyFormat(monthlyDate)}</h2>
             </center>
 
             <SpreadNav onClickLeft={() => setDate(addMonths(monthlyDate, -1))}

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Reducer } from '../reducers/entry';
 import { Actions } from '../actions/entry';
 import { DisplayAreas, InitialState } from '../state/entry';
-import { format, addDays } from 'date-fns';
+import { addDays } from 'date-fns';
 import { AddEntry, UpdateEntry } from '../api/entry';
+import { baseFormat, weeklyFormat } from '../util';
 import './EntryForm.scss';
 
 export const EntryForm = ({entry, onUpdate}) => {
@@ -26,7 +27,7 @@ export const EntryForm = ({entry, onUpdate}) => {
         <form onSubmit={e => submitForm(e)}>
 
             {entry.displayArea === DisplayAreas.Day.id && <>
-                <b className='formDate'>{format(state.date, 'do - eeee')}</b>
+                <b className='formDate'>{weeklyFormat(state.date)}</b>
             </>}
 
             <label htmlFor='title'>Title:</label>
@@ -39,7 +40,7 @@ export const EntryForm = ({entry, onUpdate}) => {
 
             {entry.displayArea === DisplayAreas.Day.id && <>
                 <label htmlFor='date'>Date:</label>
-                <input id='date' type='date' value={format(state.date, 'yyyy-MM-dd')}
+                <input id='date' type='date' value={baseFormat(state.date)}
                     onChange={e => dispatch({type: Actions.SET_DATE, value: addDays(new Date(e.target.value), 1)})} />
 
             </>}

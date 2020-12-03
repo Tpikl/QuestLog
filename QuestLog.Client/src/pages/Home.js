@@ -1,7 +1,6 @@
-import { endOfWeek, format, startOfWeek } from 'date-fns';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { monthsByCount, monthWeeks } from '../util';
+import { monthlyFormat, monthsByCount, monthWeeks, shortWeeklyFormat } from '../util';
 import StyledHome from './Home.styled';
 
 const Home = ({setDate}) => {
@@ -14,10 +13,10 @@ const Home = ({setDate}) => {
 
                 {monthsByCount(new Date(), 3).map((month, i) => { return (
                     <div key={i} className='monthGroup'>
-                        <Link className='monthLink' to='/Monthly' onClick={() => setDate(month)}>{format(month, 'MMMM - yyyy')}</Link>
+                        <Link className='monthLink' to='/Monthly' onClick={() => setDate(month)}>{monthlyFormat(month)}</Link>
 
                         {monthWeeks(month).map((week, ii) => { return (
-                            <Link key={ii} to='/Weekly' onClick={() => setDate(week)}>{format(startOfWeek(week), 'do')} - {format(endOfWeek(week), 'do')}</Link>
+                            <Link key={ii} to='/Weekly' onClick={() => setDate(week)}>{shortWeeklyFormat(week)}</Link>
                         )})}
                     </div>
                 )})}
