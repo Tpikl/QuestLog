@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addDays, endOfWeek, isToday, startOfWeek } from 'date-fns';
+import { addDays, addMilliseconds, endOfWeek, isToday, startOfWeek } from 'date-fns';
 
 import { DisplayAreas } from '../state/entry';
 import { entryApi } from '../api/entry';
@@ -14,11 +14,12 @@ import useAxios from '../api/useAxios';
 const Weekly = ({date, setDate, selectModal}) => {
     const [weeklyDate, setWeeklyDate] = useState(date);
     useEffect(() => startOfWeek(setWeeklyDate(date)), [date]);
+    const onUpdate = d => setDate(addMilliseconds(d, 1));
 
     const { response } = useAxios({
         api: entryApi,
         method: 'get',
-        url: `/ByDateRange/?start=${baseFormat(weeklyDate)}&end=${baseFormat(endOfWeek(weeklyDate))}`,
+        url: `/ByDateRange/?start=${baseFormat(startOfWeek(weeklyDate))}&end=${baseFormat(endOfWeek(weeklyDate))}`,
         config: JSON.stringify({ timeStamp: weeklyDate})
     });
     const [weekEntries, setWeekEntries] = useState([]);
@@ -67,7 +68,7 @@ const Weekly = ({date, setDate, selectModal}) => {
                                     day={item}
                                     entries={entriesByDay(i)}
                                     onSelect={selectModal}
-                                    onUpdate={() => setDate(weeklyDate)}/>
+                                    onUpdate={() => onUpdate(weeklyDate)}/>
                             </StyledEntryList>
                         )
                     })}
@@ -80,13 +81,13 @@ const Weekly = ({date, setDate, selectModal}) => {
                             day={null}
                             entries={entriesByArea(DisplayAreas.Todo.id)}
                             onSelect={selectModal}
-                            onUpdate={() => setDate(weeklyDate)}/>
+                            onUpdate={() => onUpdate(weeklyDate)}/>
                         <EntryList
                             area={DisplayAreas.Note}
                             day={null}
                             entries={entriesByArea(DisplayAreas.Note.id)}
                             onSelect={selectModal}
-                            onUpdate={() => setDate(weeklyDate)}/>
+                            onUpdate={() => onUpdate(weeklyDate)}/>
                     </StyledEntryList>
                 </div>
 

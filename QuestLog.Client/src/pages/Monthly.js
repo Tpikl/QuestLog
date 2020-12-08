@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addMonths, endOfMonth, startOfMonth } from 'date-fns';
+import { addMilliseconds, addMonths, endOfMonth, startOfMonth } from 'date-fns';
 
 import SpreadNav from '../components/SpreadNav';
 import StyledMonthly from './Monthly.styled';
@@ -13,6 +13,7 @@ import { baseFormat, monthDays, monthlyFormat, weeklyFormat } from '../util';
 const Monthly = ({date, setDate, selectModal}) => {
     const [monthlyDate, setMonthlyDate] = useState(date);
     useEffect(() => startOfMonth(setMonthlyDate(date)), [date]);
+    const onUpdate = d => setDate(addMilliseconds(d, 1));
 
     const { response } = useAxios({
         api: entryApi,
@@ -57,7 +58,7 @@ const Monthly = ({date, setDate, selectModal}) => {
                             day={item}
                             entries={entriesByDay(i+1)}
                             onSelect={selectModal}
-                            onUpdate={() => setDate(monthlyDate)}/>
+                            onUpdate={() => onUpdate(monthlyDate)}/>
                     </StyledEntryList>)
                 })}
             </div>
