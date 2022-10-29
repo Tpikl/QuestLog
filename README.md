@@ -7,7 +7,7 @@ Digital to-do application loosely following the [Bullet Journal](https://bulletj
 
 Descriptions and general information of the multiple projects involved with this application are detailed below.
 
-### `QuestLog.Api`
+### `./QuestLog.Api`
 
 .Net Core Api that exposes api endpoints to handle the various data needs of the front end.\
 
@@ -15,7 +15,7 @@ Descriptions and general information of the multiple projects involved with this
 - [Entity Framework](https://learn.microsoft.com/en-us/ef/)
   - Currently using `UseInMemoryDatabase`.
 
-### `QuestLog.Client`
+### `./QuestLog.Client`
 
 React front end client, leveraging styling and design using styled-components.
 
@@ -28,7 +28,8 @@ React front end client, leveraging styling and design using styled-components.
 ## Setup
 ### Install
 
-Installation steps necessary to run the project.
+Installation steps necessary to run the project.\
+Execute these steps before the Run commands below.
 
 .Net Api:
 ```bash
@@ -44,6 +45,10 @@ React Client:
 ```
 
 ### Run
+
+Ensure the installation steps above are completed.\
+Both projects must be run separately with the following commands.
+
 .Net Api:
 ```bash
 > cd QuestLog.Api
