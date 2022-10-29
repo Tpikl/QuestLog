@@ -1,11 +1,11 @@
 `QuestLog`
 =========
 
-Digital to-do application loosely following the [Bullet Journal](https://bulletjournal.com/) methodology and design. The eventual goal being to gamify it even further to feel more like a game Quest Log.
+Digital to-do application loosely following the [Bullet Journal](https://bulletjournal.com/) methodology and design. The eventual goal being to gamify it even further to feel more like a video game Quest Log.
 
 ## Projects
 
-Descriptions and general information of the multiple projects involved with this application are detailed below.
+Descriptions and general information of the projects involved with this application are detailed below.
 
 ### `./QuestLog.Api`
 
