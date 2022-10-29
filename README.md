@@ -26,6 +26,9 @@ React front end client, leveraging styling and design using styled-components.
 - [styled-components](https://styled-components.com/docs)
 
 ## Setup
+
+_Note: All paths relative to project root._
+
 ### Install
 
 Installation steps necessary to run the project.\
@@ -51,12 +54,12 @@ Both projects must be run separately with the following commands.
 
 .Net Api:
 ```bash
-> cd QuestLog.Api
+> cd ./QuestLog.Api
 > dotnet run
 ```
 
 React Client:
 ```bash
-> cd QuestLog.Client
+> cd ./QuestLog.Client
 > npm start
 ```
